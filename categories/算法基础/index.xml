@@ -1,0 +1,22 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>算法基础 - Category - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
+        <description>算法基础 - Category - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 10 Mar 2022 11:52:44 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="self" type="application/rss+xml" /><item>
+    <title>算法基础 I. 数组</title>
+    <link>http://localhost:1313/posts/20220310-algorithm-basics-array/</link>
+    <pubDate>Thu, 10 Mar 2022 11:52:44 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/20220310-algorithm-basics-array/</guid>
+    <description><![CDATA[<h3 id="1-二分法">1. 二分法</h3>
+<h5 id="1-基本要求">(1) 基本要求</h5>
+<ol>
+<li>前提条件：返回无重复元素的<strong>有序</strong>数组中的指定的值的下标。</li>
+<li>工作原理：每次与中间元素比较，根据比较结果决定继续搜索左半部分还是右半部分。</li>
+</ol>
+<h5 id="2-代码实现">(2) 代码实现</h5>
+<p><em>基于升序数组</em></p>]]></description>
+</item>
+</channel>
+</rss>
