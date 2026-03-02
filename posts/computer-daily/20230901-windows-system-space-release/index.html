@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Windows10/11 系统空间释放建议 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/computer-daily/20230901-windows-system-space-release/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="Windows10/11 系统空间释放建议">
+  <meta property="og:description" content="本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，注意每种方法都存在一定程度风险，仅供参考。
+1. 删除系统恢复分区 系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，依次输入：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-09-01T18:49:24+08:00">
+    <meta property="article:modified_time" content="2023-09-01T18:49:24+08:00">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="系统优化">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Windows10/11 系统空间释放建议">
+  <meta name="twitter:description" content="本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，注意每种方法都存在一定程度风险，仅供参考。
+1. 删除系统恢复分区 系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，依次输入：">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/computer-daily/20230901-windows-system-space-release/" /><link rel="prev" href="http://localhost:1313/posts/algorithm-basics/20221003-algorithm-basics-detect-cycle/" /><link rel="next" href="http://localhost:1313/posts/data-structure/20240101-c-pointer-thinking/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Windows10/11 系统空间释放建议",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/computer-daily\/20230901-windows-system-space-release\/"
+        },"genre": "posts","keywords": "Windows, 系统优化","wordcount":  951 ,
+        "url": "http:\/\/localhost:1313\/posts\/computer-daily\/20230901-windows-system-space-release\/","datePublished": "2023-09-01T18:49:24+08:00","dateModified": "2023-09-01T18:49:24+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Windows10/11 系统空间释放建议</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%94%B5%E8%84%91%E6%97%A5%E5%B8%B8/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>电脑日常</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-01">2023-09-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;951 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-删除系统恢复分区">1. 删除系统恢复分区</a></li>
+        <li><a href="#2-关闭休眠">2. 关闭休眠</a></li>
+        <li><a href="#3-减少虚拟内存">3. 减少虚拟内存</a></li>
+        <li><a href="#4-关闭系统保留空间">4. 关闭系统保留空间</a></li>
+        <li><a href="#5-关闭系统还原点">5. 关闭系统还原点</a></li>
+        <li><a href="#6-关闭传递优化">6. 关闭传递优化</a></li>
+        <li><a href="#7-删除系统更新残留-仅供参考谨慎采纳">7. 删除系统更新残留 (仅供参考，谨慎采纳)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
+<h3 id="1-删除系统恢复分区">1. 删除系统恢复分区</h3>
+<p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，依次输入：</p>
+<ol>
+<li><code>diskpart</code>  用 PowerShell 操作 DiskPart 工具</li>
+<li><code>list disk</code>  列出所有磁盘，例如笔记本一般只有一块 SSD 硬盘，磁盘号就是 0</li>
+<li><code>select disk 0</code>  选择 0 号磁盘</li>
+<li><code>list partition</code>  列出磁盘 0 的所有分区，可以在类型一栏看到恢复分区的分区号，假设是 3</li>
+<li><code>select partition 3</code>  选择 3 号分区</li>
+<li><code>delete partition override</code>   <strong>最重要的一步，删除所选分区</strong>，成功后会有提示</li>
+</ol>
+<p>成功删除后 Win + X，再按 K 打开磁盘管理工具，可以看到原来的恢复分区已经变成未分配的空间，右键单击左邻的分区选择“扩展卷”即可合并。</p>
+<h3 id="2-关闭休眠">2. 关闭休眠</h3>
+<p>休眠文件 hiberfil.sys 隐藏在 C 盘根目录，一般几个 GB 大小，如果不用休眠功能可以关闭来释放这部分空间。以管理员身份运行 PowerShell，输入：</p>
+<ul>
+<li><code>powercfg /h off</code>  关闭休眠功能</li>
+<li><code>powercfg /h on</code>    开启休眠功能</li>
+</ul>
+<h3 id="3-减少虚拟内存">3. 减少虚拟内存</h3>
+<p>虚拟内存文件 pagefile.sys 隐藏在 C 盘根目录，一般几个 GB 大小，普通用户基本不会用到这个功能，建议修改大小，步骤如下：</p>
+<ol>
+<li>依次选择高级系统设置 → 性能设置 → 高级 → 更改虚拟内存。</li>
+<li>取消勾选“自动管理所有驱动器的分页文件大小”，点击 C 盘选择“自定义大小”，将初始大小设置为系统的最低要求 (与设备主存大小相关)，最大值可视情况填写。</li>
+</ol>
+<h3 id="4-关闭系统保留空间">4. 关闭系统保留空间</h3>
+<p>以管理员身份运行 PowerShell，输入：</p>
+<ol>
+<li><code>DISM.exe /Online /Get-ReservedStorageState</code>   查看是否开启</li>
+<li><code>DISM.exe /Online /Set-ReservedStorageState /State:Disabled</code>  禁用</li>
+</ol>
+<h3 id="5-关闭系统还原点">5. 关闭系统还原点</h3>
+<p>依次执行：运行 gpedit.msc → 计算机配置 → 管理模块 → 系统 → 系统还原 → 关闭系统还原 → 启用</p>
+<h3 id="6-关闭传递优化">6. 关闭传递优化</h3>
+<p>传递优化是类似 BT 下载的 P2P 技术，只不过用于下载系统更新，现在网络速度很快，作用不大。打开系统设置：</p>
+<ol>
+<li>在“更新和安全”中关闭传递优化</li>
+<li>在“系统“的”存储”中删除传递优化缓存</li>
+</ol>
+<h3 id="7-删除系统更新残留-仅供参考谨慎采纳">7. 删除系统更新残留 (仅供参考，谨慎采纳)</h3>
+<p>Windows 系统每次更新会在<code>C:\Windows\servicing\LCU</code>目录留下大量文件。LCU 即为 Latest Cumulative Update，最新累积更新，删除后可能会导致：</p>
+<ol>
+<li>系统更新失败或出错</li>
+<li>无法回滚到之前的更新版本</li>
+<li>系统修复功能失效</li>
+<li>系统不稳定</li>
+</ol>
+<p>由于我从不用系统自带的各种恢复功能，所以每次更新完成后都会删除掉，一直正常使用，无任何影响。<strong>此项仅供参考不推荐删除，如产生任何问题概不负责</strong>。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/windows/">Windows</a>,&nbsp;<a href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/">系统优化</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/algorithm-basics/20221003-algorithm-basics-detect-cycle/" class="prev" rel="prev" title="算法基础 9. 寻找环形链表入口"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>算法基础 9. 寻找环形链表入口</a>
+            <a href="/posts/data-structure/20240101-c-pointer-thinking/" class="next" rel="next" title="对于 C 语言指针的理解与想法">对于 C 语言指针的理解与想法<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

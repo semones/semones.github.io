@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>对于 C 语言指针的理解与想法 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/data-structure/20240101-c-pointer-thinking/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="对于 C 语言指针的理解与想法">
+  <meta property="og:description" content="理解一门语言要从底层入手。
+1. 地址 C 语言的编译器会把.c文件编译为机器码存入一个.exe文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把.java文件编译为字节码存入一个.class文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-01T12:33:58+08:00">
+    <meta property="article:modified_time" content="2024-01-01T12:33:58+08:00">
+    <meta property="article:tag" content="C">
+    <meta property="article:tag" content="指针">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="对于 C 语言指针的理解与想法">
+  <meta name="twitter:description" content="理解一门语言要从底层入手。
+1. 地址 C 语言的编译器会把.c文件编译为机器码存入一个.exe文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把.java文件编译为字节码存入一个.class文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/data-structure/20240101-c-pointer-thinking/" /><link rel="prev" href="http://localhost:1313/posts/computer-daily/20230901-windows-system-space-release/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "对于 C 语言指针的理解与想法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/data-structure\/20240101-c-pointer-thinking\/"
+        },"genre": "posts","keywords": "C, 指针","wordcount":  1003 ,
+        "url": "http:\/\/localhost:1313\/posts\/data-structure\/20240101-c-pointer-thinking\/","datePublished": "2024-01-01T12:33:58+08:00","dateModified": "2024-01-01T12:33:58+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">对于 C 语言指针的理解与想法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>数据结构</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-01">2024-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1003 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-地址">1. 地址</a></li>
+        <li><a href="#2-指针">2. 指针</a></li>
+        <li><a href="#3-数组">3. 数组</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>理解一门语言要从底层入手。</p></blockquote>
+<h3 id="1-地址">1. 地址</h3>
+<p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个<code>.exe</code>文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。</p>
+<p>进程直接使用物理地址会引发冲突，所以需要<strong>隔离</strong>，由此引入<strong>虚拟内存</strong>技术。进程管理的地址都是<strong>虚拟内存地址</strong>。操作系统配合 CPU 的内存管理单元 (MMU) 为不同进程建立<strong>页表</strong>，页表记录虚拟地址到物理地址的<strong>映射关系</strong>。不同进程的虚拟内存空间的起始地址在逻辑上是一致的，所以进程通常认为自己拥有从 0 开始的全部内存空间。而 C 语言中的地址就是虚拟内存地址，打印一个指针的值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%p&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span></code></pre></div><p>输出的数值就是进程的某个虚拟地址。</p>
+<h3 id="2-指针">2. 指针</h3>
+<p>C 语言的核心是<strong>指针</strong>。</p>
+<p>指针本质上是一个<strong>存储内存地址的变量</strong>。让程序员能够直接读取或修改该地址上存储的数据。理解指针要明确 * 符号的两点意义：</p>
+<ol>
+<li><strong>指针声明</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+</span></span></code></pre></div><p>C 风格的类型说明的设计哲学是<em>一个变量的声明形式，与其在表达式中被使用时的形式相似</em>。一般类型声明由<strong>类型说明符</strong>和<strong>声明符</strong>组成，这个例子中，* 是声明符 <code>*ptr</code>的一部分，告诉编译器这个变量存放的是地址，所以我认为 * 应当靠近指针变量名，无论何时不应该与类型说明符写在一起。
+<strong>指针运算依赖于类型说明符</strong>，例如<code>ptr + 1</code>，编译器知道这是一个<code>int</code>型指针，所以地址要偏移 4 字节。</p>
+<ol start="2">
+<li><strong>解引用</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+</span></span></code></pre></div><p>参考 Java 中的引用变量，引用变量是”引用“某个地址上的数值，存储的是 JVM 中的抽象地址；指针则是存储一个地址，同样是”引用“这个地址上的数值。我们知道<code>ptr</code>本身的值是一个地址，需要 * 解出地址指向的数值，就是”解引用“。</p>
+<h3 id="3-数组">3. 数组</h3>
+<p>要明确 C 语言可以直接操作地址，所以一切都变得很底层。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">nums</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+</span></span></code></pre></div><p>这条语句里<code>nums[]</code>是声明符，声明一个名为<code>nums</code>的数组。
+<code>nums</code>的身份很复杂：</p>
+<ul>
+<li>某些情况下例如<code>sizeof(nums)</code>或<code>&amp;nums</code>，代表整个数组，代表这块连续的内存区域；</li>
+<li>在表达式中<strong>隐式转换</strong>为指向首元素的指针，数值相当于<code>&amp;nums[0]</code>；</li>
+<li><code>[]</code>其实是通过指针运算解引用，``nums[i]<code>等同于</code>*(nums + i)`。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/c/">C</a>,&nbsp;<a href="/tags/%E6%8C%87%E9%92%88/">指针</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/computer-daily/20230901-windows-system-space-release/" class="prev" rel="prev" title="Windows10/11 系统空间释放建议"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Windows10/11 系统空间释放建议</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,25 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Windows - Tag - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/tags/windows/</link>
+        <description>Windows - Tag - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 01 Sep 2023 18:49:24 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows/" rel="self" type="application/rss+xml" /><item>
+    <title>Windows10/11 系统空间释放建议</title>
+    <link>http://localhost:1313/posts/computer-daily/20230901-windows-system-space-release/</link>
+    <pubDate>Fri, 01 Sep 2023 18:49:24 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/computer-daily/20230901-windows-system-space-release/</guid>
+    <description><![CDATA[<p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
+<h3 id="1-删除系统恢复分区">1. 删除系统恢复分区</h3>
+<p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，依次输入：</p>]]></description>
+</item>
+<item>
+    <title>解决“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的问题</title>
+    <link>http://localhost:1313/posts/computer-daily/20220207-windows-ads/</link>
+    <pubDate>Mon, 07 Feb 2022 20:01:27 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/computer-daily/20220207-windows-ads/</guid>
+    <description><![CDATA[<p>有时候从网上下载的文件属性会有一条“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的安全锁定信息，这对强迫症很不友好，本文会介绍一种简单的方法来解锁，并且会提供一种方案杜绝这条信息的出现，在最后会简单解释相关原理。</p>]]></description>
+</item>
+</channel>
+</rss>

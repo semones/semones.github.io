@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据结构 - Category - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+        <description>数据结构 - Category - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 01 Jan 2024 12:33:58 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="self" type="application/rss+xml" /><item>
+    <title>对于 C 语言指针的理解与想法</title>
+    <link>http://localhost:1313/posts/data-structure/20240101-c-pointer-thinking/</link>
+    <pubDate>Mon, 01 Jan 2024 12:33:58 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/data-structure/20240101-c-pointer-thinking/</guid>
+    <description><![CDATA[<blockquote>
+<p>理解一门语言要从底层入手。</p></blockquote>
+<h3 id="1-地址">1. 地址</h3>
+<p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个<code>.exe</code>文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。</p>]]></description>
+</item>
+</channel>
+</rss>
