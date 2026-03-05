@@ -1,0 +1,59 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>哈希表 - Tag - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/</link>
+        <description>哈希表 - Tag - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 06 Dec 2022 21:16:33 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="self" type="application/rss+xml" /><item>
+    <title>算法基础 10. 求两个数组的交集</title>
+    <link>http://localhost:1313/posts/algorithm-basics/20221206-algorithm-basics-intersection/</link>
+    <pubDate>Tue, 06 Dec 2022 21:16:33 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/algorithm-basics/20221206-algorithm-basics-intersection/</guid>
+    <description><![CDATA[<blockquote>
+<p><strong>通过下标直接访问数组中的元素，就是简单的哈希表思想。</strong></p></blockquote>
+<h3 id="1-基本要求">1. 基本要求</h3>
+<ol>
+<li>给定两个数组计算交集。</li>
+<li>要求输出结果中元素不能重复。</li>
+<li>数组长度小于 1000，所以可以使用哈希表，否则<strong>哈希值分散会浪费空间</strong>。</li>
+</ol>
+<h3 id="2-代码实现">2. 代码实现</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="o">*</span><span class="nf">getIntersection</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">nums1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nums1Size</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">nums2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">nums2Size</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">returnSize</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 记录第一个数组每个数的出现次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">hashTable</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 交集长度不会超过较小数组长度，按最小来分配内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">lessSize</span> <span class="o">=</span> <span class="n">nums1Size</span> <span class="o">&lt;</span> <span class="n">nums2Size</span> <span class="o">?</span> <span class="nl">nums1Size</span> <span class="p">:</span> <span class="n">nums2Size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// calloc 会把每个字节初始化为 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="nf">calloc</span><span class="p">(</span><span class="n">lessSize</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">resultIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="o">*</span><span class="n">tempNums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums1Size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 数组 1 的值映射到哈希表的下标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">hashTable</span><span class="p">[</span><span class="n">nums1</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums2Size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">hashTable</span><span class="p">[</span><span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 判断数组 2 的值是否命中哈希表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="c1">// 如果命中则写入交集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">result</span><span class="p">[</span><span class="n">resultIndex</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// resultIndex 比交集数组最大下标要大 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">resultIndex</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 防止后续重复添加
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">hashTable</span><span class="p">[</span><span class="n">nums2</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 返回交集数组的长度便于输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="o">*</span><span class="n">returnSize</span> <span class="o">=</span> <span class="n">resultIndex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>]]></description>
+</item>
+</channel>
+</rss>
