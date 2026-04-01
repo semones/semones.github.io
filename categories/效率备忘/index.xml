@@ -1,0 +1,248 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>效率备忘 - Category - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/</link>
+        <description>效率备忘 - Category - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 13 Apr 2025 22:21:54 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/" rel="self" type="application/rss+xml" /><item>
+    <title>【效率备忘】Microsoft VS Code 配置推荐</title>
+    <link>http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/</link>
+    <pubDate>Sun, 13 Apr 2025 22:21:54 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/</guid>
+    <description><![CDATA[<h2 id="-全局设置">🛠️ 全局设置</h2>
+<h3 id="1-程序设置">1. 程序设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 程序设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;update.enableWindowsBackgroundUpdates&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>	<span class="c1">// 禁止后台下载更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;update.mode&#34;</span><span class="err">:</span> <span class="s2">&#34;none&#34;</span><span class="err">,</span>							<span class="c1">// 禁止任何更新行为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.autoCheckUpdates&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>           <span class="c1">// 禁止插件检查更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.autoUpdate&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>                 <span class="c1">// 禁止插件自动更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.ignoreRecommendations&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>		<span class="c1">// 关闭插件安装建议
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;files.autoGuessEncoding&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>				<span class="c1">// 打开文件时猜测字符集编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;explorer.compactFolders&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>				<span class="c1">// 关闭文件夹紧凑显示模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;chat.agentsControl.enabled&#34;</span><span class="err">:</span> <span class="s2">&#34;hidden&#34;</span><span class="err">,</span>			<span class="c1">// 关闭 Copilot 代理控制功能
+</span></span></span></code></pre></div><h3 id="2-工作区设置">2. 工作区设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 工作区设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.startupEditor&#34;</span><span class="err">:</span> <span class="s2">&#34;none&#34;</span><span class="err">,</span>				<span class="c1">// 关闭启动页面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.editor.empty.hint&#34;</span><span class="err">:</span> <span class="s2">&#34;hidden&#34;</span><span class="err">,</span>		<span class="c1">// 编辑器为空时，不提示打开文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.list.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>			<span class="c1">// 开启界面平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.colorTheme&#34;</span><span class="err">:</span> <span class="s2">&#34;Dracula Theme Soft&#34;</span><span class="err">,</span>	<span class="c1">// 用 Dracula Theme Official 插件设置主题外观
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.iconTheme&#34;</span><span class="err">:</span> <span class="s2">&#34;material-icon-theme&#34;</span><span class="err">,</span>	<span class="c1">// 用 Material Icon Theme 插件设置图标样式
+</span></span></span></code></pre></div><h3 id="3-编辑器设置">3. 编辑器设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 编辑器设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontSize&#34;</span><span class="err">:</span> <span class="mi">18</span><span class="err">,</span>							<span class="c1">// 字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.mouseWheelZoom&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 允许使用 ctrl + 滚轮缩放字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontFamily&#34;</span><span class="err">:</span> <span class="s2">&#34;Consolas, &#39;微软雅黑&#39;&#34;</span><span class="err">,</span>	 <span class="c1">// 设置字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 开启编辑器区域平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.cursorSmoothCaretAnimation&#34;</span><span class="err">:</span> <span class="s2">&#34;on&#34;</span><span class="err">,</span>		<span class="c1">// 开启光标平滑移动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.cursorBlinking&#34;</span><span class="err">:</span> <span class="s2">&#34;smooth&#34;</span><span class="err">,</span>				<span class="c1">// 开启光标淡入淡出效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontLigatures&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>					<span class="c1">// 关闭字体连字效果
+</span></span></span></code></pre></div><h3 id="4-终端设置">4. 终端设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 终端设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 开启终端平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="err">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="err">,</span>		<span class="c1">// 设置终端默认启动 PowerShell
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.profiles.windows&#34;</span><span class="err">:</span> <span class="p">{</span>						<span class="c1">// 终端详细配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\cmd.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Git Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-git-bash&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div><h2 id="-插件安装">📦 插件安装</h2>
+<h3 id="1-视觉效果">1. 视觉效果</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code</td>
+          <td>中文语言包</td>
+      </tr>
+      <tr>
+          <td>Dracula Theme Official</td>
+          <td>主题外观</td>
+      </tr>
+      <tr>
+          <td>Material Icon Theme</td>
+          <td>图标样式</td>
+      </tr>
+      <tr>
+          <td>Even Better TOML</td>
+          <td>TOML 语法高亮</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="2-效率提升">2. 效率提升</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Error Lens</td>
+          <td>提示语法错误</td>
+      </tr>
+      <tr>
+          <td>Path Intellisense</td>
+          <td>自动补全文件名</td>
+      </tr>
+      <tr>
+          <td>Code Runner</td>
+          <td>快速运行代码</td>
+      </tr>
+      <tr>
+          <td>CodeSnap</td>
+          <td>MacOS 效果的代码截图</td>
+      </tr>
+      <tr>
+          <td>Lingma - Alibaba Cloud AI Coding Assistant</td>
+          <td>通义灵码 AI Agent</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-插件配置">🔧 插件配置</h2>
+<h3 id="1-code-runner">1. Code Runner</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Code Runner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;code-runner.runInTerminal&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 在 VS Code 集成的终端中运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;code-runner.languageIdToFileExtensionMap&#34;</span><span class="err">:</span> <span class="p">{</span>		<span class="c1">// 扩展名映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;bat&#34;</span><span class="p">:</span> <span class="s2">&#34;.bat&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;powershell&#34;</span><span class="p">:</span> <span class="s2">&#34;.ps1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;.ts&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;code-runner.executorMap&#34;</span><span class="err">:</span> <span class="p">{</span>						<span class="c1">// 编程语言对应的执行命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;javascript&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\php\\php.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;python&#34;</span><span class="p">:</span> <span class="s2">&#34;python&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;perl&#34;</span><span class="p">:</span> <span class="s2">&#34;perl&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;ruby&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Ruby23-x64\\bin\\ruby.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="s2">&#34;go run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;html&#34;</span><span class="p">:</span> <span class="s2">&#34;\&#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 控制台代码页切换到 UTF-8 (65001)，避免中文乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;chcp 65001 &amp;&amp; cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div><h3 id="2-lingma---alibaba-cloud-ai-coding-assistant">2. Lingma - Alibaba Cloud AI Coding Assistant</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.memories&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>							<span class="c1">// 关闭通义灵码记忆功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="err">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="err">,</span>	<span class="c1">// 允许通义灵码自动调用工具
+</span></span></span></code></pre></div><h3 id="3-python">3. Python</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Python
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.autoComplete.extraPaths&#34;</span><span class="err">:</span> <span class="p">[]</span><span class="err">,</span>				<span class="c1">// 为自动补全功能添加额外的模块搜索路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.analysis.completeFunctionParens&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>		<span class="c1">// 开启自动补全括号和占位符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.analysis.typeCheckingMode&#34;</span><span class="err">:</span> <span class="s2">&#34;standard&#34;</span><span class="err">,</span>		<span class="c1">// 设置类型检查模式为标准
+</span></span></span></code></pre></div><h2 id="-配置文件">📄 配置文件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 程序设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;update.enableWindowsBackgroundUpdates&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// 禁止后台下载更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;update.mode&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>                          <span class="c1">// 禁止任何更新行为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.autoCheckUpdates&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>           <span class="c1">// 禁止插件检查更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.autoUpdate&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                 <span class="c1">// 禁止插件自动更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.ignoreRecommendations&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>       <span class="c1">// 关闭插件安装建议
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;files.autoGuessEncoding&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                <span class="c1">// 打开文件时猜测字符集编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;explorer.compactFolders&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>               <span class="c1">// 关闭文件夹紧凑显示模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;chat.agentsControl.enabled&#34;</span><span class="p">:</span> <span class="s2">&#34;hidden&#34;</span><span class="p">,</span>         <span class="c1">// 关闭 Copilot 代理控制功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 工作区设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.startupEditor&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>              <span class="c1">// 关闭启动页面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.editor.empty.hint&#34;</span><span class="p">:</span> <span class="s2">&#34;hidden&#34;</span><span class="p">,</span>        <span class="c1">// 编辑器为空时，不提示打开文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.list.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>         <span class="c1">// 开启界面平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.colorTheme&#34;</span><span class="p">:</span> <span class="s2">&#34;Dracula Theme Soft&#34;</span><span class="p">,</span>   <span class="c1">// 用 Dracula Theme Official 插件设置主题外观
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.iconTheme&#34;</span><span class="p">:</span> <span class="s2">&#34;material-icon-theme&#34;</span><span class="p">,</span>   <span class="c1">// 用 Material Icon Theme 插件设置图标样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 编辑器设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontSize&#34;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>                          <span class="c1">// 字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.mouseWheelZoom&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                  <span class="c1">// 允许使用 ctrl + 滚轮缩放字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontFamily&#34;</span><span class="p">:</span> <span class="s2">&#34;Consolas, &#39;微软雅黑&#39;&#34;</span><span class="p">,</span>     <span class="c1">// 设置字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                 <span class="c1">// 开启编辑器区域平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.cursorSmoothCaretAnimation&#34;</span><span class="p">:</span> <span class="s2">&#34;on&#34;</span><span class="p">,</span>      <span class="c1">// 开启光标平滑移动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.cursorBlinking&#34;</span><span class="p">:</span> <span class="s2">&#34;smooth&#34;</span><span class="p">,</span>              <span class="c1">// 开启光标淡入淡出效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontLigatures&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                  <span class="c1">// 关闭字体连字效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 终端设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                    <span class="c1">// 开启终端平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="p">,</span>     <span class="c1">// 设置终端默认启动 PowerShell
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.profiles.windows&#34;</span><span class="p">:</span> <span class="p">{</span>                       <span class="c1">// 终端详细配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\cmd.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Git Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-git-bash&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Code Runner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;code-runner.runInTerminal&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                  <span class="c1">// 在 VS Code 集成的终端中运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;code-runner.languageIdToFileExtensionMap&#34;</span><span class="p">:</span> <span class="p">{</span>       <span class="c1">// 扩展名映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;bat&#34;</span><span class="p">:</span> <span class="s2">&#34;.bat&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;powershell&#34;</span><span class="p">:</span> <span class="s2">&#34;.ps1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;.ts&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;code-runner.executorMap&#34;</span><span class="p">:</span> <span class="p">{</span>                        <span class="c1">// 编程语言对应的执行命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;javascript&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\php\\php.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;python&#34;</span><span class="p">:</span> <span class="s2">&#34;python&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;perl&#34;</span><span class="p">:</span> <span class="s2">&#34;perl&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ruby&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Ruby23-x64\\bin\\ruby.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="s2">&#34;go run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;html&#34;</span><span class="p">:</span> <span class="s2">&#34;\&#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 控制台代码页切换到 UTF-8 (65001)，避免中文乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;chcp 65001 &amp;&amp; cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.memories&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                           <span class="c1">// 关闭通义灵码记忆功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="p">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="p">,</span>   <span class="c1">// 允许通义灵码自动调用工具
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Python
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.autoComplete.extraPaths&#34;</span><span class="p">:</span> <span class="p">[],</span>               <span class="c1">// 为自动补全功能添加额外的模块搜索路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.analysis.completeFunctionParens&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// 开启自动补全括号和占位符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.analysis.typeCheckingMode&#34;</span><span class="p">:</span> <span class="s2">&#34;standard&#34;</span><span class="p">,</span>     <span class="c1">// 设置类型检查模式为标准
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div>]]></description>
+</item>
+<item>
+    <title>【效率备忘】Windows10/11 系统空间释放建议</title>
+    <link>http://localhost:1313/posts/efficiency-memos/230901-windows-system-space-release---%E5%89%AF%E6%9C%AC/</link>
+    <pubDate>Fri, 01 Sep 2023 18:49:24 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/efficiency-memos/230901-windows-system-space-release---%E5%89%AF%E6%9C%AC/</guid>
+    <description><![CDATA[<p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
+<h2 id="1-删除系统恢复分区">1. 删除系统恢复分区</h2>
+<p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，<strong>依次</strong>输入：</p>]]></description>
+</item>
+<item>
+    <title>【效率备忘】解决“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的问题</title>
+    <link>http://localhost:1313/posts/efficiency-memos/230207-windows-ads/</link>
+    <pubDate>Tue, 07 Feb 2023 20:01:27 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/efficiency-memos/230207-windows-ads/</guid>
+    <description><![CDATA[<p>有时候从网上下载的文件属性会有一条“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的安全锁定信息，这对强迫症很不友好，本文会介绍一种简单的方法来解锁，并且会提供一种方案杜绝这条信息的出现，在最后会简单解释相关原理。</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【算法笔记】螺旋矩阵 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/algorithm-notes/240721-spiral-matrix/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="【算法笔记】螺旋矩阵">
+  <meta property="og:description" content="⚙️ 基本设定 1. 规则描述 生成一个包含 n 个数字，m 行的矩阵。 从 1 开始，由左上角顺时针螺旋向内排列。 每行数字个数相等，尽可能减少列的数量。 数字不够时使用 * 填充。 2. 输入描述 输入两个整数，依次表示 n 和 m。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-21T20:14:22+08:00">
+    <meta property="article:modified_time" content="2024-07-21T20:14:22+08:00">
+    <meta property="article:tag" content="逻辑模拟">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【算法笔记】螺旋矩阵">
+  <meta name="twitter:description" content="⚙️ 基本设定 1. 规则描述 生成一个包含 n 个数字，m 行的矩阵。 从 1 开始，由左上角顺时针螺旋向内排列。 每行数字个数相等，尽可能减少列的数量。 数字不够时使用 * 填充。 2. 输入描述 输入两个整数，依次表示 n 和 m。">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/algorithm-notes/240721-spiral-matrix/" /><link rel="prev" href="http://localhost:1313/posts/algorithm-notes/240322-purchase-orders/" /><link rel="next" href="http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【算法笔记】螺旋矩阵",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/algorithm-notes\/240721-spiral-matrix\/"
+        },"genre": "posts","keywords": "逻辑模拟","wordcount":  1489 ,
+        "url": "http:\/\/localhost:1313\/posts\/algorithm-notes\/240721-spiral-matrix\/","datePublished": "2024-07-21T20:14:22+08:00","dateModified": "2024-07-21T20:14:22+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【算法笔记】螺旋矩阵</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-21">2024-07-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1489 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-基本设定">⚙️ 基本设定</a>
+      <ul>
+        <li><a href="#1-规则描述">1. 规则描述</a></li>
+        <li><a href="#2-输入描述">2. 输入描述</a></li>
+        <li><a href="#3-输出描述">3. 输出描述</a></li>
+      </ul>
+    </li>
+    <li><a href="#-重点解析">🔎 重点解析</a>
+      <ul>
+        <li><a href="#1-列表推导式">1. 列表推导式</a></li>
+        <li><a href="#2-主逻辑算法">2. 主逻辑算法</a></li>
+        <li><a href="#3-输出">3. 输出</a></li>
+        <li><a href="#4-切片-slice-语法糖">4. 切片 (Slice) 语法糖</a></li>
+      </ul>
+    </li>
+    <li><a href="#-代码实现">💻 代码实现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="-基本设定">⚙️ 基本设定</h2>
+<h3 id="1-规则描述">1. 规则描述</h3>
+<ul>
+<li>生成一个包含 n 个数字，m 行的矩阵。</li>
+<li>从 1 开始，由左上角顺时针螺旋向内排列。</li>
+<li>每行数字个数相等，尽可能减少列的数量。</li>
+<li>数字不够时使用 * 填充。</li>
+</ul>
+<h3 id="2-输入描述">2. 输入描述</h3>
+<p>输入两个整数，依次表示 n 和 m。</p>
+<h3 id="3-输出描述">3. 输出描述</h3>
+<pre tabindex="0"><code>举例输入：9 4
+1 2 3
+* * 4
+9 * 5
+8 7 6
+</code></pre><h2 id="-重点解析">🔎 重点解析</h2>
+<h3 id="1-列表推导式">1. 列表推导式</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">condition</span><span class="p">]</span>
+</span></span></code></pre></div><p><code>expression</code>表达式计算后的值便是<code>list</code>的每一个元素，一般是对从可迭代对象<code>iterable</code>中取出来的<code>item</code>进行操作。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 计算列数，必须向上取整保证可以存完</span>
+</span></span><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化矩阵</span>
+</span></span><span class="line"><span class="cl"><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&#34;*&#34;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</span></span></code></pre></div><p>有两层推导式：</p>
+<ul>
+<li>外层<code>[... for _ in range(n)]</code>：创建<code>n</code>行。</li>
+<li>内层<code>[&quot;*&quot; for _ in range(cols)]</code>：每列用<code>&quot;*&quot;</code>填充。</li>
+<li><code>_</code>是一个合法变量名，一般表示<strong>这个值本身只是个占位符，不会被使用，作用域不同两个<code>_</code>也不会冲突</strong>，这里用于迭代填入相同的符号<code>&quot;*&quot;</code>。</li>
+</ul>
+<h3 id="2-主逻辑算法">2. 主逻辑算法</h3>
+<p>填数算法的核心分为<strong>持续填充</strong>和<strong>改变方向</strong>两部分，基于方向控制器用<strong>相邻</strong>的两个元素控制。</p>
+<ol>
+<li>方向控制器<code>directions = [0, 1, 0, -1, 0]</code>：
+<ul>
+<li>右：x 不变，y 加 1，对应<code>[0, 1]</code>；</li>
+<li>下：x 加 1，y 不变，对应<code>[1, 0]</code>；</li>
+<li>左：x 不变，y 减 1，对应<code>[0, -1]</code>；</li>
+<li>上：x 减 1，y 不变，对应<code>[-1, 0]</code>。</li>
+</ul>
+</li>
+<li>持续填充：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">new_x</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">new_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></div><p><strong>控制<code>index</code>的值就可以改变相邻的一对值，实现方向控制</strong>。例如，<code>index = 0</code>时，<code>directions[index]</code>和<code>directions[index + 1]</code>构成<code>[0, 1]</code>，此时<code>new_x</code>不变，<code>new_y</code>加 1，实现向右移动。
+3. 改变方向：
+<code>new_x</code>和<code>new_y</code>是<strong>先驱指针</strong>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">new_x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_x</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&gt;=</span> <span class="n">Math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="n">new_x</span><span class="p">][</span><span class="n">new_y</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+</span></span></code></pre></div><ul>
+<li>改变方向就是改变<code>index</code>的值，螺旋矩阵是右下左上轮回，根据条件判断，需要改变的时候就改变<code>index</code>。</li>
+<li>下标从 0 开始，所以<code>=</code>行数或列数时，也是越界。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+</span></span></code></pre></div><p>让<code>index</code>在 0 - 3 之间循环。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">start_x</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span></span></code></pre></div><p>此时<code>new_x</code>或<code>new_y</code>是越界状态，要用<code>start_x</code>和<code>start_y</code>拐弯。</p>
+<h3 id="3-输出">3. 输出</h3>
+<ol>
+<li>手动</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output_str</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output_str</span> <span class="o">+=</span> <span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 除了每行最后一个，每个数后面都要加空格</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output_str</span> <span class="o">+=</span> <span class="s2">&#34; &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">output_str</span><span class="p">)</span>
+</span></span></code></pre></div><ol start="2">
+<li>简化</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="n">cols</span><span class="p">]))</span>
+</span></span></code></pre></div><ul>
+<li><code>matrix[i]</code>：获取一行；</li>
+<li><code>[:cols]</code>：获取前<code>cols</code>个数；</li>
+<li><code>&quot; &quot;.join(...)</code>：把<strong>只包含字符串</strong>的可迭代对象中的字符串按照指定<strong>分隔符</strong>拼接起来。</li>
+</ul>
+<h3 id="4-切片-slice-语法糖">4. 切片 (Slice) 语法糖</h3>
+<table>
+  <thead>
+      <tr>
+          <th>语法形式</th>
+          <th>描述</th>
+          <th>示例 (<code>lst = [0,1,2,3,4,5]</code>)</th>
+          <th>结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>seq[start:stop]</code></td>
+          <td>从 <code>start</code> 到 <code>stop-1</code> 的元素 (包含开头，不包含结尾)</td>
+          <td><code>lst[2:5]</code></td>
+          <td><code>[2, 3, 4]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[start:]</code></td>
+          <td>从 <code>start</code> 到序列末尾的所有元素</td>
+          <td><code>lst[3:]</code></td>
+          <td><code>[3, 4, 5]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[:stop]</code></td>
+          <td>从序列开头到 <code>stop-1</code> 的元素</td>
+          <td><code>lst[:4]</code></td>
+          <td><code>[0, 1, 2, 3]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[:]</code></td>
+          <td>整个序列的浅拷贝</td>
+          <td><code>lst[:]</code></td>
+          <td><code>[0,1,2,3,4,5]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[start:stop:step]</code></td>
+          <td>从 <code>start</code> 到 <code>stop-1</code>，按步长 <code>step</code> 选取元素</td>
+          <td><code>lst[1:5:2]</code></td>
+          <td><code>[1, 3]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[::step]</code></td>
+          <td>按步长 <code>step</code> 选取整个序列的元素</td>
+          <td><code>lst[::2]</code></td>
+          <td><code>[0, 2, 4]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[::-1]</code></td>
+          <td>步长为负时，反向选取元素 (常用于反转序列)</td>
+          <td><code>lst[::-1]</code></td>
+          <td><code>[5,4,3,2,1,0]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[-n:]</code></td>
+          <td>最后 <code>n</code> 个元素</td>
+          <td><code>lst[-3:]</code></td>
+          <td><code>[3, 4, 5]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[:-n]</code></td>
+          <td>除最后 <code>n</code> 个元素外的所有元素</td>
+          <td><code>lst[:-2]</code></td>
+          <td><code>[0, 1, 2, 3]</code></td>
+      </tr>
+      <tr>
+          <td><code>seq[start:stop:-step]</code></td>
+          <td>步长为负时，从 <code>start</code> 向 <code>stop</code> 反向选取 (需注意索引方向)</td>
+          <td><code>lst[4:1:-1]</code></td>
+          <td><code>[4, 3, 2]</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-代码实现">💻 代码实现</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">Math</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 方向控制器</span>
+</span></span><span class="line"><span class="cl"><span class="n">directions</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 列表推导式，输入总数和行数</span>
+</span></span><span class="line"><span class="cl"><span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>               <span class="c1"># 总数</span>
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>               <span class="c1"># 行数</span>
+</span></span><span class="line"><span class="cl"><span class="n">cols</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span>     <span class="c1"># 列数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化矩阵，用 * 填充所有位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&#34;*&#34;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_x</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1"># 行索引</span>
+</span></span><span class="line"><span class="cl"><span class="n">start_y</span> <span class="o">=</span> <span class="mi">0</span>     <span class="c1"># 列索引</span>
+</span></span><span class="line"><span class="cl"><span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># 当前数字，从 1 开始</span>
+</span></span><span class="line"><span class="cl"><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># 用于确定方向的索引</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="n">k</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># --- 持续填充 --- #</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">matrix</span><span class="p">[</span><span class="n">start_x</span><span class="p">][</span><span class="n">start_y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>       <span class="c1"># 实则是存放列表的列表，str 类型方便最后拼接字符</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_x</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># --- 改变方向 --- #</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 分别规定上边界、下边界、左边界、右边界，最后检查是否已经填充数字</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">new_x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_x</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&gt;=</span> <span class="n">cols</span> <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="n">new_x</span><span class="p">][</span><span class="n">new_y</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_x</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_x</span> <span class="o">=</span> <span class="n">new_x</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_y</span> <span class="o">=</span> <span class="n">new_y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34; &#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="n">cols</span><span class="p">]))</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-21</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E9%80%BB%E8%BE%91%E6%A8%A1%E6%8B%9F/">逻辑模拟</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/algorithm-notes/240322-purchase-orders/" class="prev" rel="prev" title="【算法笔记】采购订单"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【算法笔记】采购订单</a>
+            <a href="/posts/efficiency-memos/250413-vscode-deploy/" class="next" rel="next" title="【效率备忘】Microsoft VS Code 配置推荐">【效率备忘】Microsoft VS Code 配置推荐<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

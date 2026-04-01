@@ -1,0 +1,51 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>逻辑模拟 - Tag - Sem&#39;s Blog</title>
+        <link>http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E6%A8%A1%E6%8B%9F/</link>
+        <description>逻辑模拟 - Tag - Sem&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 21 Jul 2024 20:14:22 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%BB%E8%BE%91%E6%A8%A1%E6%8B%9F/" rel="self" type="application/rss+xml" /><item>
+    <title>【算法笔记】螺旋矩阵</title>
+    <link>http://localhost:1313/posts/algorithm-notes/240721-spiral-matrix/</link>
+    <pubDate>Sun, 21 Jul 2024 20:14:22 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/algorithm-notes/240721-spiral-matrix/</guid>
+    <description><![CDATA[<h2 id="-基本设定">⚙️ 基本设定</h2>
+<h3 id="1-规则描述">1. 规则描述</h3>
+<ul>
+<li>生成一个包含 n 个数字，m 行的矩阵。</li>
+<li>从 1 开始，由左上角顺时针螺旋向内排列。</li>
+<li>每行数字个数相等，尽可能减少列的数量。</li>
+<li>数字不够时使用 * 填充。</li>
+</ul>
+<h3 id="2-输入描述">2. 输入描述</h3>
+<p>输入两个整数，依次表示 n 和 m。</p>]]></description>
+</item>
+<item>
+    <title>【算法笔记】采购订单</title>
+    <link>http://localhost:1313/posts/algorithm-notes/240322-purchase-orders/</link>
+    <pubDate>Fri, 22 Mar 2024 21:45:10 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/algorithm-notes/240322-purchase-orders/</guid>
+    <description><![CDATA[<h2 id="-基本设定">⚙️ 基本设定</h2>
+<h3 id="1-规则描述">1. 规则描述</h3>
+<ul>
+<li>采购系统中，采购申请 (PR) 要<strong>批准</strong>后才能生成采购订单 (PO)，0 表示审批通过，1 表示审批拒绝，2 表示待审批。</li>
+<li>单价高于 100 元的商品，每次申请单独生成一条 PO；单价相同且小于等于 100 元的相同商品<strong>合并</strong>到一条 PO。</li>
+<li>商品单价小于 100 元且数量大于等于 100 的商品单价<strong>打九折</strong>。</li>
+<li>按商品 ID 升序排序，ID 相同则按数量降序排列。</li>
+</ul>
+<h3 id="2-输入描述">2. 输入描述</h3>
+<ul>
+<li>第一行输入 PR 的数量 n。</li>
+<li>接下来 n 行，每行输入四个整数表示商品 ID、数量、单价、PR 状态。</li>
+</ul>
+<h3 id="3-输出描述">3. 输出描述</h3>
+<ul>
+<li>商品 ID、数量、单价。</li>
+</ul>
+<h2 id="-重点解析">🔎 重点解析</h2>
+<h3 id="1-整体逻辑">1. 整体逻辑</h3>
+<p>搞清楚<strong>每轮输入是采购申请 PR，最终生成是采购订单 PO</strong>。</p>]]></description>
+</item>
+</channel>
+</rss>
