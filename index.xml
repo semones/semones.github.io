@@ -3,9 +3,156 @@
         <title>Sem&#39;s Blog</title>
         <link>http://localhost:1313/</link>
         <description>坚持学习。</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 13 Apr 2025 22:21:54 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 02 Mar 2026 19:09:56 &#43;0800</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>【Financial RAG Demo 项目】RAG 构建</title>
+    <link>http://localhost:1313/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/</link>
+    <pubDate>Mon, 02 Mar 2026 19:09:56 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/</guid>
+    <description><![CDATA[<blockquote>
+<p>按照数据流动顺序。</p></blockquote>
+<h2 id="-历史记录附加">📜 历史记录附加</h2>
+<h3 id="1-用户原始输入">1. 用户原始输入</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">res_stream</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s2">&#34;rag&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">stream</span><span class="p">({</span><span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span> <span class="p">{</span><span class="s2">&#34;configurable&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;session_id&#34;</span><span class="p">:</span> <span class="s2">&#34;user_001.json&#34;</span><span class="p">})</span>
+</span></span></code></pre></div><ol>
+<li>参数：
+<ul>
+<li><code>propmt</code>：用户原始输入的字符串；</li>
+<li><code>st.session_state[&quot;rag&quot;]</code>：<code>RagService</code>对象实例；</li>
+<li><code>chain</code>：<code>rag.py</code>中的<code>RunnableWithMessageHistory</code>类型属性；</li>
+<li><code>stream()</code>：LangChain 的<code>Runnable</code>接口的核心方法，返回<strong>生成器</strong>，用于流式传输出。</li>
+</ul>
+</li>
+<li>行为：这两个字典会<strong>先被传递给<code>rag.py</code>中的<code>conversation_chain</code></strong> 添加历史消息。</li>
+</ol>
+<h3 id="2-添加历史消息">2. 添加历史消息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">conversation_chain</span> <span class="o">=</span> <span class="n">RunnableWithMessageHistory</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chain</span><span class="p">,</span>                          <span class="c1"># RAG 流程链路</span>
+</span></span><span class="line"><span class="cl">        <span class="n">get_history</span><span class="p">,</span>                    <span class="c1"># file_history_store.py 模块中定义的方法，期望一个 session_id</span>
+</span></span><span class="line"><span class="cl">        <span class="n">input_messages_key</span><span class="o">=</span><span class="s2">&#34;input&#34;</span><span class="p">,</span>     <span class="c1"># 告诉 RunnableWithMessageHistory 哪个是用户原始输入</span>
+</span></span><span class="line"><span class="cl">        <span class="n">history_messages_key</span><span class="o">=</span><span class="s2">&#34;history&#34;</span>  <span class="c1"># 告诉 RunnableWithMessageHistory 把历史记录添加到哪个键</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>流程：</p>]]></description>
+</item>
+<item>
+    <title>【Financial RAG Demo 项目】检索器管理</title>
+    <link>http://localhost:1313/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/</link>
+    <pubDate>Wed, 25 Feb 2026 23:01:23 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/</guid>
+    <description><![CDATA[<h2 id="-初始化__init__self-embedding">🚀 初始化<code>__init__(self, embedding)</code></h2>
+<h3 id="1-接收一个嵌入模型类">1. 接收一个嵌入模型类</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">embedding</span>
+</span></span></code></pre></div><h3 id="2-初始化向量数据库连接信息">2. 初始化向量数据库连接信息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">vector_store</span> <span class="o">=</span> <span class="n">Chroma</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">collection_name</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">collection_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">embedding_function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">persist_directory</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">persist_directory</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>与<code>KnowledgeBaseService</code>相同，依旧是三个参数：</p>]]></description>
+</item>
+<item>
+    <title>【Financial RAG Demo 项目】历史记录存储</title>
+    <link>http://localhost:1313/posts/project-research/financial-rag-demo/260223-financial-rag-demo-history-messages-storage/</link>
+    <pubDate>Mon, 23 Feb 2026 20:37:19 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/project-research/financial-rag-demo/260223-financial-rag-demo-history-messages-storage/</guid>
+    <description><![CDATA[<h2 id="-继承basechatmessagehistory">🧬 继承<code>BaseChatMessageHistory</code></h2>
+<h3 id="1-必须实现的核心方法">1. 必须实现的核心方法</h3>
+<ul>
+<li><code>message</code>属性：获取历史消息列表。</li>
+<li><code>add_message()</code>方法：添加新消息。</li>
+</ul>
+<h3 id="2-意义">2. 意义</h3>
+<p>附加历史消息进链时，<code>RunnableWithMessageHistory</code>期望一个<code>BaseChatMessageHistory</code>类型的对象，继承此类可以被框架识别，<strong>内部调用</strong>标准方法。</p>]]></description>
+</item>
+<item>
+    <title>【Financial RAG Demo 项目】知识库构建</title>
+    <link>http://localhost:1313/posts/project-research/financial-rag-demo/260217-financial-rag-demo-knowledge-base-construction/</link>
+    <pubDate>Tue, 17 Feb 2026 22:12:35 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/project-research/financial-rag-demo/260217-financial-rag-demo-knowledge-base-construction/</guid>
+    <description><![CDATA[<h2 id="-初始化-__init__self">🚀 初始化 <code>__init__(self)</code></h2>
+<h3 id="1-初始化向量数据库">1. 初始化向量数据库</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">chroma</span> <span class="o">=</span> <span class="n">Chroma</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">collection_name</span><span class="o">=</span><span class="s2">&#34;rag&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">embedding_function</span><span class="o">=</span><span class="n">DashScopeEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&#34;text-embedding-v4&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">persist_directory</span><span class="o">=</span><span class="s2">&#34;./chromadb&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>使用<code>langchain_chroma</code>的<code>Chroma</code>。</li>
+<li>定义三个参数：
+<ul>
+<li><code>collection_name</code>：数据库的名称。</li>
+<li><code>embedding_function</code>：向量转换使用的模型。</li>
+<li><code>persist_directory</code>：数据库的位置，持久化地址。</li>
+</ul>
+</li>
+<li>模型使用<code>langchain_community.embeddings</code>的<code>DashScopeEmbeddings</code>，阿里云通义千问的类。</li>
+</ul>
+<h3 id="2-初始化文本分割器">2. 初始化文本分割器</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">spliter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chunk_size</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">separators</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;!&#34;</span><span class="p">,</span> <span class="s2">&#34;?&#34;</span><span class="p">,</span> <span class="s2">&#34;。&#34;</span><span class="p">,</span> <span class="s2">&#34;！&#34;</span><span class="p">,</span> <span class="s2">&#34;？&#34;</span><span class="p">,</span> <span class="s2">&#34; &#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">length_function</span><span class="o">=</span><span class="nb">len</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>使用<code>langchain_text_splitters</code>的<code>RecursiveCharacterTextSplitter</code>。</li>
+<li>定义四个参数：
+<ul>
+<li><code>chunk_size</code>：文本块最大长度，计算方法用<code>length_function</code>指定。</li>
+<li><code>chunk_overlap</code>：相邻文本块重叠的字符数。</li>
+<li><code>separators</code>：分割时检测的分隔符，一个列表，按顺序决定优先级。先尝试用<code>&quot;\n\n&quot;</code> (段落) 分割，若超过最大长度再尝试<code>&quot;\n&quot;</code>。</li>
+<li><code>length_function</code>：指定长度计算方法。<code>len</code>表示用 Python 的<strong>字符</strong>计算，任何一个文本单位都算一个字符。</li>
+</ul>
+</li>
+</ul>
+<h2 id="-主函数-upload_by_strself-data-str-filename">🛠️ 主函数 <code>upload_by_str(self, data: str, filename)</code></h2>
+<h3 id="1-md5-去重">1. MD5 去重</h3>
+<ol>
+<li>流程：计算文件的 MD5  -&gt; 检测是否已有相同 MD5 -&gt; 保存未处理过的 MD5</li>
+<li><strong>哈希对象 (HASH)</strong>
+<ol>
+<li>意义：接收<strong>字节序列</strong>，内部处理后返回 32 位的字符串。</li>
+<li>一般流程：
+<ol>
+<li>使用字符串的<code>encode()</code>方法把文件转换为<strong>字节序列</strong>；</li>
+<li>调用<code>hashlib</code>模块的哈希算法函数，如<code>md5()</code>、<code>sha1()</code>、<code>sha256()</code>、<code>blake2b</code>生成对应的哈希对象；</li>
+<li>使用<code>update()</code>方法传入字节序列；</li>
+<li>使用<code>digest()</code>或<code>hexdigest()</code>(分别是二进制和十六进制) 完成计算并取出字符串。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对比阶段实际生产可用 SQLite 来存储。</li>
+</ol>
+<h3 id="2-分割器">2. 分割器</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">knowledge_chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spliter</span><span class="o">.</span><span class="n">split_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span></code></pre></div><p>使用<code>spliter</code>的<code>split_text()</code>方法，接收字符串，返回一个<strong>列表</strong>，里面是切好的字符串。</p>]]></description>
+</item>
+<item>
+    <title>【Financial RAG Demo 项目】概览</title>
+    <link>http://localhost:1313/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/</link>
+    <pubDate>Wed, 11 Feb 2026 21:54:52 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/</guid>
+    <description><![CDATA[<h2 id="-项目定位">🎯 项目定位</h2>
+<h3 id="1-项目名称">1. 项目名称</h3>
+<p>基于 RAG 技术的金融领域智能客服系统</p>
+<h3 id="2-技术栈">2. 技术栈</h3>
+<p>Python + LangChain + 通义千问 + Chroma + Streamlit</p>
+<h3 id="3-核心功能">3. 核心功能</h3>
+<ul>
+<li>知识库管理</li>
+<li>检索增强式对话</li>
+</ul>
+<h2 id="-技术架构">🏗️ 技术架构</h2>
+<p>整个项目分为两个线索，分别是<strong>把文件嵌入向量数据库</strong>、<strong>根据用户提问检索数据库并返回结果</strong>。</p>]]></description>
+</item>
+<item>
     <title>【效率备忘】Microsoft VS Code 配置推荐</title>
     <link>http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/</link>
     <pubDate>Sun, 13 Apr 2025 22:21:54 &#43;0800</pubDate>
@@ -292,137 +439,6 @@
     <description><![CDATA[<p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
 <h2 id="1-删除系统恢复分区">1. 删除系统恢复分区</h2>
 <p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，<strong>依次</strong>输入：</p>]]></description>
-</item>
-<item>
-    <title>【算法笔记】员工派遣</title>
-    <link>http://localhost:1313/posts/algorithm-notes/230630-employee-dispatch/</link>
-    <pubDate>Fri, 30 Jun 2023 20:41:23 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://localhost:1313/posts/algorithm-notes/230630-employee-dispatch/</guid>
-    <description><![CDATA[<h2 id="-基本设定">⚙️ 基本设定</h2>
-<h3 id="1-规则描述">1. 规则描述</h3>
-<ul>
-<li>派遣员工去代号为 x 和 y 的两个国家，分别要派 cntx 名和 cnty 名员工。</li>
-<li>每个员工有一个员工号，从 1 开始连续增长。</li>
-<li>从工号 1 到 k 中选择员工派遣。</li>
-<li>工号为 x 的倍数的不能去 x 国，工号为 y 的倍数的不能去 y 国。</li>
-</ul>
-<h3 id="2-输入描述">2. 输入描述</h3>
-<ul>
-<li>输入四个整数，依次表示 x，y，cntx，cnty。</li>
-<li>x 和 y 必须为<strong>质数</strong>。</li>
-<li>1 &lt; x &lt; y &lt; 30000</li>
-<li>1 &lt; cntx, cnty &lt; 10^9</li>
-</ul>
-<h3 id="3-输出描述">3. 输出描述</h3>
-<ul>
-<li>输出满足条件最小的 k。</li>
-</ul>
-<h2 id="-重点解析">🔎 重点解析</h2>
-<h3 id="1-数学逻辑分析">1. 数学逻辑分析</h3>
-<ol>
-<li>根据<strong>容斥原理</strong>计算基本参数：
-<ol>
-<li>两个集合：
-<ul>
-<li>不能去 x 国的人数：A = k / x</li>
-<li>不能去 y 国的人数：B = k / y</li>
-<li>都不能去的人数：C = k / (x * y)</li>
-</ul>
-</li>
-<li>专用名额：
-<ul>
-<li>x 国的专用名额：B - C = k / y - k / (x * y)</li>
-<li>y 国的专用名额：A - C = k / x - k / (x * y)</li>
-</ul>
-</li>
-<li>公共名额：
-<ul>
-<li>k - A - B + C</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>总体思路：
-<ul>
-<li>假定一个 k，先让两国消耗尽专用名额，再计算公共名额的需求量。</li>
-<li><strong>比较公共名额与需求量的大小判断 k 是否合适。</strong></li>
-</ul>
-</li>
-</ol>
-<h3 id="2-求最优解的二分法">2. 求最优解的二分法</h3>
-<ol>
-<li>用二分法寻找 k：
-<ul>
-<li>根据题设范围设置左右指针。</li>
-<li>若公共名额大于需求量，说明 k 值过大，要收缩右指针；反之说明 k 值过小，要拉高左指针。</li>
-</ul>
-</li>
-<li>二分法要点：
-<ul>
-<li><code>while (left &lt;= right)</code>左闭右闭区间，指针相等时依旧有意义。</li>
-<li>先更新中点，再用中点进行条件判断。</li>
-<li>满足题设条件下，<strong>记录中点值</strong>，然后选择要继续操作的区间：</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">满足条件但可能不是最优解</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span><span class="w">  </span><span class="c1">// 在满足的条件下就可以记录结果，尽管可能不是最优解</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="-代码实现">💻 代码实现</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmployeeDispatch</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">cntx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">cnty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">2000000000L</span><span class="p">;</span><span class="w">  </span><span class="c1">// 便于计算右指针初始值</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 更新中点值</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// 防止溢出</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// x 国还需要从“公共名额”中取的人数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">needX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">cntx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// y 国还需要从“公共名额”中取的人数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">needY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">cnty</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 公共名额总数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 记录中点值，然后选择要继续操作的区间</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">common</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">needX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">needY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">scanner</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div>]]></description>
-</item>
-<item>
-    <title>【效率备忘】解决“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的问题</title>
-    <link>http://localhost:1313/posts/efficiency-memos/230207-windows-ads/</link>
-    <pubDate>Tue, 07 Feb 2023 20:01:27 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://localhost:1313/posts/efficiency-memos/230207-windows-ads/</guid>
-    <description><![CDATA[<p>有时候从网上下载的文件属性会有一条“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的安全锁定信息，这对强迫症很不友好，本文会介绍一种简单的方法来解锁，并且会提供一种方案杜绝这条信息的出现，在最后会简单解释相关原理。</p>]]></description>
 </item>
 </channel>
 </rss>

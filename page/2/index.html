@@ -68,130 +68,278 @@
         alt="/images/avatar.jpeg"
         title="/images/avatar.jpeg" width="512" height="512" /></a></div><h1 class="home-title">学习笔记</h1><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="mailto:semones_ma@163.com" title="Email" rel="me"><i class="far fa-envelope fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/algorithm-notes/230630-employee-dispatch/">【算法笔记】员工派遣</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-06-30">2023-06-30</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法笔记</a></span></div><div class="content"><h2 id="-基本设定">⚙️ 基本设定</h2>
+        <a href="/posts/efficiency-memos/250413-vscode-deploy/">【效率备忘】Microsoft VS Code 配置推荐</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-04-13">2025-04-13</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>效率备忘</a></span></div><div class="content"><h2 id="-全局设置">🛠️ 全局设置</h2>
+<h3 id="1-程序设置">1. 程序设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 程序设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;update.enableWindowsBackgroundUpdates&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>	<span class="c1">// 禁止后台下载更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;update.mode&#34;</span><span class="err">:</span> <span class="s2">&#34;none&#34;</span><span class="err">,</span>							<span class="c1">// 禁止任何更新行为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.autoCheckUpdates&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>           <span class="c1">// 禁止插件检查更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.autoUpdate&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>                 <span class="c1">// 禁止插件自动更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;extensions.ignoreRecommendations&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>		<span class="c1">// 关闭插件安装建议
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;files.autoGuessEncoding&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>				<span class="c1">// 打开文件时猜测字符集编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;explorer.compactFolders&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>				<span class="c1">// 关闭文件夹紧凑显示模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;chat.agentsControl.enabled&#34;</span><span class="err">:</span> <span class="s2">&#34;hidden&#34;</span><span class="err">,</span>			<span class="c1">// 关闭 Copilot 代理控制功能
+</span></span></span></code></pre></div><h3 id="2-工作区设置">2. 工作区设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 工作区设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.startupEditor&#34;</span><span class="err">:</span> <span class="s2">&#34;none&#34;</span><span class="err">,</span>				<span class="c1">// 关闭启动页面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.editor.empty.hint&#34;</span><span class="err">:</span> <span class="s2">&#34;hidden&#34;</span><span class="err">,</span>		<span class="c1">// 编辑器为空时，不提示打开文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.list.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>			<span class="c1">// 开启界面平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.colorTheme&#34;</span><span class="err">:</span> <span class="s2">&#34;Dracula Theme Soft&#34;</span><span class="err">,</span>	<span class="c1">// 用 Dracula Theme Official 插件设置主题外观
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;workbench.iconTheme&#34;</span><span class="err">:</span> <span class="s2">&#34;material-icon-theme&#34;</span><span class="err">,</span>	<span class="c1">// 用 Material Icon Theme 插件设置图标样式
+</span></span></span></code></pre></div><h3 id="3-编辑器设置">3. 编辑器设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 编辑器设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontSize&#34;</span><span class="err">:</span> <span class="mi">18</span><span class="err">,</span>							<span class="c1">// 字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.mouseWheelZoom&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 允许使用 ctrl + 滚轮缩放字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontFamily&#34;</span><span class="err">:</span> <span class="s2">&#34;Consolas, &#39;微软雅黑&#39;&#34;</span><span class="err">,</span>	 <span class="c1">// 设置字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 开启编辑器区域平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.cursorSmoothCaretAnimation&#34;</span><span class="err">:</span> <span class="s2">&#34;on&#34;</span><span class="err">,</span>		<span class="c1">// 开启光标平滑移动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.cursorBlinking&#34;</span><span class="err">:</span> <span class="s2">&#34;smooth&#34;</span><span class="err">,</span>				<span class="c1">// 开启光标淡入淡出效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;editor.fontLigatures&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>					<span class="c1">// 关闭字体连字效果
+</span></span></span></code></pre></div><h3 id="4-终端设置">4. 终端设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// 终端设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.smoothScrolling&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 开启终端平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="err">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="err">,</span>		<span class="c1">// 设置终端默认启动 PowerShell
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;terminal.integrated.profiles.windows&#34;</span><span class="err">:</span> <span class="p">{</span>						<span class="c1">// 终端详细配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\cmd.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Git Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-git-bash&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div><h2 id="-插件安装">📦 插件安装</h2>
+<h3 id="1-视觉效果">1. 视觉效果</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Chinese (Simplified) (简体中文) Language Pack for Visual Studio Code</td>
+          <td>中文语言包</td>
+      </tr>
+      <tr>
+          <td>Dracula Theme Official</td>
+          <td>主题外观</td>
+      </tr>
+      <tr>
+          <td>Material Icon Theme</td>
+          <td>图标样式</td>
+      </tr>
+      <tr>
+          <td>Even Better TOML</td>
+          <td>TOML 语法高亮</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="2-效率提升">2. 效率提升</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Error Lens</td>
+          <td>提示语法错误</td>
+      </tr>
+      <tr>
+          <td>Path Intellisense</td>
+          <td>自动补全文件名</td>
+      </tr>
+      <tr>
+          <td>Code Runner</td>
+          <td>快速运行代码</td>
+      </tr>
+      <tr>
+          <td>CodeSnap</td>
+          <td>MacOS 效果的代码截图</td>
+      </tr>
+      <tr>
+          <td>Lingma - Alibaba Cloud AI Coding Assistant</td>
+          <td>通义灵码 AI Agent</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="-插件配置">🔧 插件配置</h2>
+<h3 id="1-code-runner">1. Code Runner</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Code Runner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;code-runner.runInTerminal&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>					<span class="c1">// 在 VS Code 集成的终端中运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;code-runner.languageIdToFileExtensionMap&#34;</span><span class="err">:</span> <span class="p">{</span>		<span class="c1">// 扩展名映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;bat&#34;</span><span class="p">:</span> <span class="s2">&#34;.bat&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;powershell&#34;</span><span class="p">:</span> <span class="s2">&#34;.ps1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;.ts&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;code-runner.executorMap&#34;</span><span class="err">:</span> <span class="p">{</span>						<span class="c1">// 编程语言对应的执行命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;javascript&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\php\\php.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;python&#34;</span><span class="p">:</span> <span class="s2">&#34;python&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;perl&#34;</span><span class="p">:</span> <span class="s2">&#34;perl&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;ruby&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Ruby23-x64\\bin\\ruby.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="s2">&#34;go run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;html&#34;</span><span class="p">:</span> <span class="s2">&#34;\&#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 控制台代码页切换到 UTF-8 (65001)，避免中文乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;chcp 65001 &amp;&amp; cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></div><h3 id="2-lingma---alibaba-cloud-ai-coding-assistant">2. Lingma - Alibaba Cloud AI Coding Assistant</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.memories&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>							<span class="c1">// 关闭通义灵码记忆功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="err">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="err">,</span>	<span class="c1">// 允许通义灵码自动调用工具
+</span></span></span></code></pre></div><h3 id="3-python">3. Python</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Python
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.autoComplete.extraPaths&#34;</span><span class="err">:</span> <span class="p">[]</span><span class="err">,</span>				<span class="c1">// 为自动补全功能添加额外的模块搜索路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.analysis.completeFunctionParens&#34;</span><span class="err">:</span> <span class="kc">true</span><span class="err">,</span>		<span class="c1">// 开启自动补全括号和占位符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.analysis.typeCheckingMode&#34;</span><span class="err">:</span> <span class="s2">&#34;standard&#34;</span><span class="err">,</span>		<span class="c1">// 设置类型检查模式为标准
+</span></span></span></code></pre></div><h2 id="-配置文件">📄 配置文件</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 程序设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;update.enableWindowsBackgroundUpdates&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// 禁止后台下载更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;update.mode&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>                          <span class="c1">// 禁止任何更新行为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.autoCheckUpdates&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>           <span class="c1">// 禁止插件检查更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.autoUpdate&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                 <span class="c1">// 禁止插件自动更新
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;extensions.ignoreRecommendations&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>       <span class="c1">// 关闭插件安装建议
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;files.autoGuessEncoding&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                <span class="c1">// 打开文件时猜测字符集编码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;explorer.compactFolders&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>               <span class="c1">// 关闭文件夹紧凑显示模式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;chat.agentsControl.enabled&#34;</span><span class="p">:</span> <span class="s2">&#34;hidden&#34;</span><span class="p">,</span>         <span class="c1">// 关闭 Copilot 代理控制功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 工作区设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.startupEditor&#34;</span><span class="p">:</span> <span class="s2">&#34;none&#34;</span><span class="p">,</span>              <span class="c1">// 关闭启动页面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.editor.empty.hint&#34;</span><span class="p">:</span> <span class="s2">&#34;hidden&#34;</span><span class="p">,</span>        <span class="c1">// 编辑器为空时，不提示打开文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.list.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>         <span class="c1">// 开启界面平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.colorTheme&#34;</span><span class="p">:</span> <span class="s2">&#34;Dracula Theme Soft&#34;</span><span class="p">,</span>   <span class="c1">// 用 Dracula Theme Official 插件设置主题外观
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;workbench.iconTheme&#34;</span><span class="p">:</span> <span class="s2">&#34;material-icon-theme&#34;</span><span class="p">,</span>   <span class="c1">// 用 Material Icon Theme 插件设置图标样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 编辑器设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontSize&#34;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>                          <span class="c1">// 字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.mouseWheelZoom&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                  <span class="c1">// 允许使用 ctrl + 滚轮缩放字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontFamily&#34;</span><span class="p">:</span> <span class="s2">&#34;Consolas, &#39;微软雅黑&#39;&#34;</span><span class="p">,</span>     <span class="c1">// 设置字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                 <span class="c1">// 开启编辑器区域平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.cursorSmoothCaretAnimation&#34;</span><span class="p">:</span> <span class="s2">&#34;on&#34;</span><span class="p">,</span>      <span class="c1">// 开启光标平滑移动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.cursorBlinking&#34;</span><span class="p">:</span> <span class="s2">&#34;smooth&#34;</span><span class="p">,</span>              <span class="c1">// 开启光标淡入淡出效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;editor.fontLigatures&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                  <span class="c1">// 关闭字体连字效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 终端设置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.smoothScrolling&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                    <span class="c1">// 开启终端平滑滚动效果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="p">,</span>     <span class="c1">// 设置终端默认启动 PowerShell
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;terminal.integrated.profiles.windows&#34;</span><span class="p">:</span> <span class="p">{</span>                       <span class="c1">// 终端详细配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Windows\\System32\\cmd.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Git Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-git-bash&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Code Runner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;code-runner.runInTerminal&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>                  <span class="c1">// 在 VS Code 集成的终端中运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;code-runner.languageIdToFileExtensionMap&#34;</span><span class="p">:</span> <span class="p">{</span>       <span class="c1">// 扩展名映射
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;bat&#34;</span><span class="p">:</span> <span class="s2">&#34;.bat&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;powershell&#34;</span><span class="p">:</span> <span class="s2">&#34;.ps1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;typescript&#34;</span><span class="p">:</span> <span class="s2">&#34;.ts&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;code-runner.executorMap&#34;</span><span class="p">:</span> <span class="p">{</span>                        <span class="c1">// 编程语言对应的执行命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;javascript&#34;</span><span class="p">:</span> <span class="s2">&#34;node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;php&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\php\\php.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;python&#34;</span><span class="p">:</span> <span class="s2">&#34;python&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;perl&#34;</span><span class="p">:</span> <span class="s2">&#34;perl&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ruby&#34;</span><span class="p">:</span> <span class="s2">&#34;C:\\Ruby23-x64\\bin\\ruby.exe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;go&#34;</span><span class="p">:</span> <span class="s2">&#34;go run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;html&#34;</span><span class="p">:</span> <span class="s2">&#34;\&#34;C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;java&#34;</span><span class="p">:</span> <span class="s2">&#34;cd $dir &amp;&amp; javac $fileName &amp;&amp; java $fileNameWithoutExt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 控制台代码页切换到 UTF-8 (65001)，避免中文乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;chcp 65001 &amp;&amp; cd $dir &amp;&amp; gcc $fileName -o $fileNameWithoutExt &amp;&amp; $dir$fileNameWithoutExt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.memories&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                           <span class="c1">// 关闭通义灵码记忆功能
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="p">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="p">,</span>   <span class="c1">// 允许通义灵码自动调用工具
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Python
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.autoComplete.extraPaths&#34;</span><span class="p">:</span> <span class="p">[],</span>               <span class="c1">// 为自动补全功能添加额外的模块搜索路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.analysis.completeFunctionParens&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// 开启自动补全括号和占位符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;python.analysis.typeCheckingMode&#34;</span><span class="p">:</span> <span class="s2">&#34;standard&#34;</span><span class="p">,</span>     <span class="c1">// 设置类型检查模式为标准
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer">
+        <a href="/posts/efficiency-memos/250413-vscode-deploy/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E8%BD%AF%E4%BB%B6%E4%BC%98%E5%8C%96/">软件优化</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/algorithm-notes/240721-spiral-matrix/">【算法笔记】螺旋矩阵</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-07-21">2024-07-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法笔记</a></span></div><div class="content"><h2 id="-基本设定">⚙️ 基本设定</h2>
 <h3 id="1-规则描述">1. 规则描述</h3>
 <ul>
-<li>派遣员工去代号为 x 和 y 的两个国家，分别要派 cntx 名和 cnty 名员工。</li>
-<li>每个员工有一个员工号，从 1 开始连续增长。</li>
-<li>从工号 1 到 k 中选择员工派遣。</li>
-<li>工号为 x 的倍数的不能去 x 国，工号为 y 的倍数的不能去 y 国。</li>
+<li>生成一个包含 n 个数字，m 行的矩阵。</li>
+<li>从 1 开始，由左上角顺时针螺旋向内排列。</li>
+<li>每行数字个数相等，尽可能减少列的数量。</li>
+<li>数字不够时使用 * 填充。</li>
+</ul>
+<h3 id="2-输入描述">2. 输入描述</h3>
+<p>输入两个整数，依次表示 n 和 m。</p></div><div class="post-footer">
+        <a href="/posts/algorithm-notes/240721-spiral-matrix/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E9%80%BB%E8%BE%91%E6%A8%A1%E6%8B%9F/">逻辑模拟</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/algorithm-notes/240322-purchase-orders/">【算法笔记】采购订单</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-22">2024-03-22</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法笔记</a></span></div><div class="content"><h2 id="-基本设定">⚙️ 基本设定</h2>
+<h3 id="1-规则描述">1. 规则描述</h3>
+<ul>
+<li>采购系统中，采购申请 (PR) 要<strong>批准</strong>后才能生成采购订单 (PO)，0 表示审批通过，1 表示审批拒绝，2 表示待审批。</li>
+<li>单价高于 100 元的商品，每次申请单独生成一条 PO；单价相同且小于等于 100 元的相同商品<strong>合并</strong>到一条 PO。</li>
+<li>商品单价小于 100 元且数量大于等于 100 的商品单价<strong>打九折</strong>。</li>
+<li>按商品 ID 升序排序，ID 相同则按数量降序排列。</li>
 </ul>
 <h3 id="2-输入描述">2. 输入描述</h3>
 <ul>
-<li>输入四个整数，依次表示 x，y，cntx，cnty。</li>
-<li>x 和 y 必须为<strong>质数</strong>。</li>
-<li>1 &lt; x &lt; y &lt; 30000</li>
-<li>1 &lt; cntx, cnty &lt; 10^9</li>
+<li>第一行输入 PR 的数量 n。</li>
+<li>接下来 n 行，每行输入四个整数表示商品 ID、数量、单价、PR 状态。</li>
 </ul>
 <h3 id="3-输出描述">3. 输出描述</h3>
 <ul>
-<li>输出满足条件最小的 k。</li>
+<li>商品 ID、数量、单价。</li>
 </ul>
 <h2 id="-重点解析">🔎 重点解析</h2>
-<h3 id="1-数学逻辑分析">1. 数学逻辑分析</h3>
-<ol>
-<li>根据<strong>容斥原理</strong>计算基本参数：
-<ol>
-<li>两个集合：
-<ul>
-<li>不能去 x 国的人数：A = k / x</li>
-<li>不能去 y 国的人数：B = k / y</li>
-<li>都不能去的人数：C = k / (x * y)</li>
-</ul>
-</li>
-<li>专用名额：
-<ul>
-<li>x 国的专用名额：B - C = k / y - k / (x * y)</li>
-<li>y 国的专用名额：A - C = k / x - k / (x * y)</li>
-</ul>
-</li>
-<li>公共名额：
-<ul>
-<li>k - A - B + C</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>总体思路：
-<ul>
-<li>假定一个 k，先让两国消耗尽专用名额，再计算公共名额的需求量。</li>
-<li><strong>比较公共名额与需求量的大小判断 k 是否合适。</strong></li>
-</ul>
-</li>
-</ol>
-<h3 id="2-求最优解的二分法">2. 求最优解的二分法</h3>
-<ol>
-<li>用二分法寻找 k：
-<ul>
-<li>根据题设范围设置左右指针。</li>
-<li>若公共名额大于需求量，说明 k 值过大，要收缩右指针；反之说明 k 值过小，要拉高左指针。</li>
-</ul>
-</li>
-<li>二分法要点：
-<ul>
-<li><code>while (left &lt;= right)</code>左闭右闭区间，指针相等时依旧有意义。</li>
-<li>先更新中点，再用中点进行条件判断。</li>
-<li>满足题设条件下，<strong>记录中点值</strong>，然后选择要继续操作的区间：</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">满足条件但可能不是最优解</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span><span class="w">  </span><span class="c1">// 在满足的条件下就可以记录结果，尽管可能不是最优解</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div><h2 id="-代码实现">💻 代码实现</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">EmployeeDispatch</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Scanner</span><span class="w"> </span><span class="n">scanner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">cntx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">cnty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scanner</span><span class="p">.</span><span class="na">nextLong</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">2000000000L</span><span class="p">;</span><span class="w">  </span><span class="c1">// 便于计算右指针初始值</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">right</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">left</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">right</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 更新中点值</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">right</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">left</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">2</span><span class="p">;</span><span class="w">  </span><span class="c1">// 防止溢出</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// x 国还需要从“公共名额”中取的人数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">needX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">cntx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// y 国还需要从“公共名额”中取的人数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">needY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">cnty</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">)));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 公共名额总数</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kt">long</span><span class="w"> </span><span class="n">common</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="c1">// 记录中点值，然后选择要继续操作的区间</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">common</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">needX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">needY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">1</span><span class="p">;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">k</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">scanner</span><span class="p">.</span><span class="na">close</span><span class="p">();</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span></code></pre></div></div><div class="post-footer">
-        <a href="/posts/algorithm-notes/230630-employee-dispatch/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95/">二分法</a></div></div>
+<h3 id="1-整体逻辑">1. 整体逻辑</h3>
+<p>搞清楚<strong>每轮输入是采购申请 PR，最终生成是采购订单 PO</strong>。</p></div><div class="post-footer">
+        <a href="/posts/algorithm-notes/240322-purchase-orders/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E9%80%BB%E8%BE%91%E6%A8%A1%E6%8B%9F/">逻辑模拟</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/efficiency-memos/230207-windows-ads/">【效率备忘】解决“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的问题</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-02-07">2023-02-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>效率备忘</a></span></div><div class="content"><p>有时候从网上下载的文件属性会有一条“此文件来自其他计算机，可能被阻止以帮助保护该计算机”的安全锁定信息，这对强迫症很不友好，本文会介绍一种简单的方法来解锁，并且会提供一种方案杜绝这条信息的出现，在最后会简单解释相关原理。</p></div><div class="post-footer">
-        <a href="/posts/efficiency-memos/230207-windows-ads/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/windows/">Windows</a></div></div>
+        <a href="/posts/programming-jottings/240101-c-pointer-thinking/">【编程随笔】对于 C 语言指针的理解与想法</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-01">2024-01-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%BC%96%E7%A8%8B%E9%9A%8F%E7%AC%94/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>编程随笔</a></span></div><div class="content"><blockquote>
+<p><strong>理解一门语言要从底层入手。</strong></p></blockquote>
+<h2 id="1-地址">1. 地址</h2>
+<p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个<code>.exe</code>文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。</p></div><div class="post-footer">
+        <a href="/posts/programming-jottings/240101-c-pointer-thinking/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/c/">C</a>,&nbsp;<a href="/tags/%E6%8C%87%E9%92%88/">指针</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/efficiency-memos/230901-windows-system-space-release---%E5%89%AF%E6%9C%AC/">【效率备忘】Windows10/11 系统空间释放建议</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-09-01">2023-09-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>效率备忘</a></span></div><div class="content"><p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
+<h2 id="1-删除系统恢复分区">1. 删除系统恢复分区</h2>
+<p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，<strong>依次</strong>输入：</p></div><div class="post-footer">
+        <a href="/posts/efficiency-memos/230901-windows-system-space-release---%E5%89%AF%E6%9C%AC/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/windows/">Windows</a>,&nbsp;<a href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/">系统优化</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -199,6 +347,10 @@
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/2/">2</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/3/">3</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

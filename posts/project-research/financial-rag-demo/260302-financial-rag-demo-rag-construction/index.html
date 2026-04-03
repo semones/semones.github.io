@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【Financial RAG Demo 项目】RAG 构建 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="【Financial RAG Demo 项目】RAG 构建">
+  <meta property="og:description" content="按照数据流动顺序。
+📜 历史记录附加 1. 用户原始输入 res_stream = st.session_state[&#34;rag&#34;].chain.stream({&#34;input&#34;: prompt}, {&#34;configurable&#34;: {&#34;session_id&#34;: &#34;user_001.json&#34;}) 参数： propmt：用户原始输入的字符串； st.session_state[&#34;rag&#34;]：RagService对象实例； chain：rag.py中的RunnableWithMessageHistory类型属性； stream()：LangChain 的Runnable接口的核心方法，返回生成器，用于流式传输出。 行为：这两个字典会先被传递给rag.py中的conversation_chain 添加历史消息。 2. 添加历史消息 conversation_chain = RunnableWithMessageHistory( chain, # RAG 流程链路 get_history, # file_history_store.py 模块中定义的方法，期望一个 session_id input_messages_key=&#34;input&#34;, # 告诉 RunnableWithMessageHistory 哪个是用户原始输入 history_messages_key=&#34;history&#34; # 告诉 RunnableWithMessageHistory 把历史记录添加到哪个键 ) 流程：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-03-02T19:09:56+08:00">
+    <meta property="article:modified_time" content="2026-03-02T19:09:56+08:00">
+    <meta property="article:tag" content="LangChain">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="Python">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【Financial RAG Demo 项目】RAG 构建">
+  <meta name="twitter:description" content="按照数据流动顺序。
+📜 历史记录附加 1. 用户原始输入 res_stream = st.session_state[&#34;rag&#34;].chain.stream({&#34;input&#34;: prompt}, {&#34;configurable&#34;: {&#34;session_id&#34;: &#34;user_001.json&#34;}) 参数： propmt：用户原始输入的字符串； st.session_state[&#34;rag&#34;]：RagService对象实例； chain：rag.py中的RunnableWithMessageHistory类型属性； stream()：LangChain 的Runnable接口的核心方法，返回生成器，用于流式传输出。 行为：这两个字典会先被传递给rag.py中的conversation_chain 添加历史消息。 2. 添加历史消息 conversation_chain = RunnableWithMessageHistory( chain, # RAG 流程链路 get_history, # file_history_store.py 模块中定义的方法，期望一个 session_id input_messages_key=&#34;input&#34;, # 告诉 RunnableWithMessageHistory 哪个是用户原始输入 history_messages_key=&#34;history&#34; # 告诉 RunnableWithMessageHistory 把历史记录添加到哪个键 ) 流程：">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/" /><link rel="prev" href="http://localhost:1313/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【Financial RAG Demo 项目】RAG 构建",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260302-financial-rag-demo-rag-construction\/"
+        },"genre": "posts","keywords": "LangChain, RAG, Python","wordcount":  2494 ,
+        "url": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260302-financial-rag-demo-rag-construction\/","datePublished": "2026-03-02T19:09:56+08:00","dateModified": "2026-03-02T19:09:56+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【Financial RAG Demo 项目】RAG 构建</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>项目研究</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-03-02">2026-03-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2494 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-历史记录附加">📜 历史记录附加</a>
+      <ul>
+        <li><a href="#1-用户原始输入">1. 用户原始输入</a></li>
+        <li><a href="#2-添加历史消息">2. 添加历史消息</a></li>
+      </ul>
+    </li>
+    <li><a href="#-增强深度检索">🔎 增强深度检索</a>
+      <ul>
+        <li><a href="#1-必要前置知识">1. 必要前置知识</a></li>
+        <li><a href="#2-检索链">2. 检索链</a></li>
+        <li><a href="#3-初始化检索得到的数据">3. 初始化检索得到的数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#-模型总结并生成回复">🤖 模型总结并生成回复</a>
+      <ul>
+        <li><a href="#1-构建提示词模板">1. 构建提示词模板</a></li>
+        <li><a href="#2-获取回复">2. 获取回复</a></li>
+      </ul>
+    </li>
+    <li><a href="#-输出最终内容">💬 输出最终内容</a>
+      <ul>
+        <li><a href="#1-生成器对象">1. 生成器对象</a></li>
+        <li><a href="#2-生成器函数">2. 生成器函数</a></li>
+        <li><a href="#3-streamlit">3. Streamlit</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>按照数据流动顺序。</p></blockquote>
+<h2 id="-历史记录附加">📜 历史记录附加</h2>
+<h3 id="1-用户原始输入">1. 用户原始输入</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">res_stream</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s2">&#34;rag&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">stream</span><span class="p">({</span><span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span> <span class="p">{</span><span class="s2">&#34;configurable&#34;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&#34;session_id&#34;</span><span class="p">:</span> <span class="s2">&#34;user_001.json&#34;</span><span class="p">})</span>
+</span></span></code></pre></div><ol>
+<li>参数：
+<ul>
+<li><code>propmt</code>：用户原始输入的字符串；</li>
+<li><code>st.session_state[&quot;rag&quot;]</code>：<code>RagService</code>对象实例；</li>
+<li><code>chain</code>：<code>rag.py</code>中的<code>RunnableWithMessageHistory</code>类型属性；</li>
+<li><code>stream()</code>：LangChain 的<code>Runnable</code>接口的核心方法，返回<strong>生成器</strong>，用于流式传输出。</li>
+</ul>
+</li>
+<li>行为：这两个字典会<strong>先被传递给<code>rag.py</code>中的<code>conversation_chain</code></strong> 添加历史消息。</li>
+</ol>
+<h3 id="2-添加历史消息">2. 添加历史消息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">conversation_chain</span> <span class="o">=</span> <span class="n">RunnableWithMessageHistory</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">chain</span><span class="p">,</span>                          <span class="c1"># RAG 流程链路</span>
+</span></span><span class="line"><span class="cl">        <span class="n">get_history</span><span class="p">,</span>                    <span class="c1"># file_history_store.py 模块中定义的方法，期望一个 session_id</span>
+</span></span><span class="line"><span class="cl">        <span class="n">input_messages_key</span><span class="o">=</span><span class="s2">&#34;input&#34;</span><span class="p">,</span>     <span class="c1"># 告诉 RunnableWithMessageHistory 哪个是用户原始输入</span>
+</span></span><span class="line"><span class="cl">        <span class="n">history_messages_key</span><span class="o">=</span><span class="s2">&#34;history&#34;</span>  <span class="c1"># 告诉 RunnableWithMessageHistory 把历史记录添加到哪个键</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>流程：</p>
+<ol>
+<li><code>RunnableWithMessageHistory</code>会自动从字典<code>{&quot;configurable&quot;: {&quot;session_id&quot;: &quot;user_001.json&quot;}</code>中取出<code>&quot;user_001.json&quot;</code>作为这个参数传入，<strong>返回一个<code>FileChatMessageHistory</code>对象</strong>。</li>
+<li>对于这个<code>FileChatMessageHistory</code>对象，<code>RunnableWithMessageHistory</code>做了两件事：
+<ul>
+<li>访问<code>messages</code>属性，返回之前的<strong>历史消息列表</strong>，格式为<code>list[BaseMessage]：[HumanMessage(...), AIMessage(...), ...]</code>。</li>
+<li>从字典<code>{&quot;input&quot;: prompt}</code>提取出<code>prompt</code>转换成<code>list[BaseMessage]</code>格式传入<code>add_messages()</code>方法，把此次输入也永久化。</li>
+</ul>
+</li>
+<li>创建一个键值对，键是<code>history_messages_key</code>，值是历史消息列表，添加到原先的<code>{&quot;input&quot;: prompt}</code>字典中，最终变成<code>{&quot;input&quot;: &quot;prompt&quot;, &quot;history&quot;: [HumanMessage(...), AIMessage(...)]}</code>的形式。</li>
+<li>把这个字典传入<code>chain</code>，开始了 RAG 流程。</li>
+</ol>
+<h2 id="-增强深度检索">🔎 增强深度检索</h2>
+<h3 id="1-必要前置知识">1. 必要前置知识</h3>
+<ol>
+<li>要明确<code>chain</code>的初始数据形式：<code>{&quot;input&quot;: &quot;prompt&quot;, &quot;history&quot;: [HumanMessage(...), AIMessage(...), ...]}</code>。</li>
+<li><code>RunnableLambda()</code>把普通函包装成 LangChain 的 Runnable 组件，使其可以参与链式调用。</li>
+</ol>
+<h3 id="2-检索链">2. 检索链</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="s2">&#34;context&#34;</span><span class="p">:</span> <span class="n">RunnableLambda</span><span class="p">(</span><span class="n">format_for_retriever</span><span class="p">)</span> <span class="o">|</span> <span class="n">retriever</span> <span class="o">|</span> <span class="n">RunnableLambda</span><span class="p">(</span><span class="n">format_document</span><span class="p">)</span>
+</span></span></code></pre></div><ol>
+<li><strong>提取出用户原始输入</strong>：<code>format_for_retriever()</code>返回<code>input</code>的值作为字符串传给检索器<code>retriever</code>。</li>
+<li><strong>深度检索</strong>：<code>retriever</code>是<code>VectorStoreService</code>类型的对象，实现了<code>Runnable</code>接口，通过<code>invoke()</code>接收字符串并进行向量转换、检索文本。最终返回一个文件列表<code>list[Document]</code>。<strong><code>Document</code>是标准类，内部有两个字符串属性：<code>page_content</code>是内容，<code>metadata</code>是元数据。</strong></li>
+<li><strong>规格化文本</strong>：<code>format_document()</code>把所有文件的内容和元数据拼接成一个字符串，赋值给<code>&quot;context&quot;</code>键。</li>
+</ol>
+<h3 id="3-初始化检索得到的数据">3. 初始化检索得到的数据</h3>
+<p>链路最开始的字典形式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	            <span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="s2">&#34;prompt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;history&#34;</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">AIMessage</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">             <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;context&#34;</span><span class="p">:</span> <span class="s2">&#34;...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="-模型总结并生成回复">🤖 模型总结并生成回复</h2>
+<h3 id="1-构建提示词模板">1. 构建提示词模板</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">|</span> <span class="n">RunnableLambda</span><span class="p">(</span><span class="n">format_for_prompt_template</span><span class="p">)</span> <span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span>
+</span></span></code></pre></div><ol>
+<li><strong>初始化适用于提示词模板的字典</strong>：<code>format_for_prompt_template()</code>用简单的<code>[]</code>取值提取出键为 <strong><code>input</code>、<code>history</code>、<code>context</code></strong> 三个键值对，返回一个字典，于是原先的字典变成了：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="s2">&#34;prompt&#34;</span><span class="p">,</span>                                   <span class="c1"># 字符串</span>
+</span></span><span class="line"><span class="cl">	<span class="s2">&#34;history&#34;</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">AIMessage</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">]</span>  <span class="c1"># 列表</span>
+</span></span><span class="line"><span class="cl">	<span class="s2">&#34;context&#34;</span><span class="p">:</span> <span class="s2">&#34;...&#34;</span>                                     <span class="c1"># 字符串</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ol start="2">
+<li><strong>构建提示词模板</strong>：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">prompt_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="p">(</span><span class="s2">&#34;system&#34;</span><span class="p">,</span> <span class="s2">&#34;你是一位专业的理财投资顾问...参考资料：</span><span class="si">{context}</span><span class="s2">。&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="n">MessagesPlaceholder</span><span class="p">(</span><span class="s2">&#34;history&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">(</span><span class="s2">&#34;user&#34;</span><span class="p">,</span> <span class="s2">&#34;请回答用户提问：</span><span class="si">{input}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><code>from_messages()</code>期望一个元组列表，内置几个标准值：
+<ul>
+<li><code>system</code>：AI 的背景设定，<strong>把检索的知识提前灌输给 AI</strong>，达到一个“懂”的假象，这就是 RAG 的核心思想。另外可以填入角色设定等一系列要求。</li>
+<li><code>user</code>：用户最新的最原始的输入。</li>
+<li><code>history</code>：历史消息。</li>
+</ul>
+</li>
+<li><code>MessagesPlaceholder(&quot;history&quot;)</code>：把历史消息列表展开，用于生成最终消息列表。<strong>提示词模板最终给模型的是一个<code>list[BaseMessage]</code>。</strong></li>
+</ul>
+<h3 id="2-获取回复">2. 获取回复</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">|</span> <span class="bp">self</span><span class="o">.</span><span class="n">chat_model</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+</span></span></code></pre></div><ol>
+<li>模型接收的列表形式：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&#34;你是一位专业的理财投资顾问...参考资料：文档片段：xxx</span><span class="se">\n</span><span class="s2">文档元数据：yyy&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&#34;上一个问题&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&#34;上一个回答&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&#34;请回答用户提问：用户当前问题&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></div><p>返回一个<code>AIMessage</code>对象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">AIMessage</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">content</span><span class="o">=</span><span class="s2">&#34;回答内容&#34;</span><span class="p">,</span>           <span class="c1"># 实际文本</span>
+</span></span><span class="line"><span class="cl">    <span class="n">response_metadata</span><span class="o">=</span><span class="p">{</span>          <span class="c1"># 元数据</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;token_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>    <span class="c1"># token 使用情况</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;model_name&#39;</span><span class="p">:</span> <span class="s1">&#39;qwen&#39;</span><span class="p">,</span>    <span class="c1"># 模型名称</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;finish_reason&#39;</span><span class="p">:</span> <span class="s1">&#39;stop&#39;</span>  <span class="c1"># 结束原因</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">id</span><span class="o">=</span><span class="s1">&#39;run-xxx&#39;</span><span class="p">,</span>                <span class="c1"># 请求 ID (用于追踪)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">usage_metadata</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">}</span>         <span class="c1"># 使用量统计</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><ol start="2">
+<li>提取文本：<code>StrOutputParser()</code>从<code>AIMessage</code>对象中提取<code>content</code>返回字符串。</li>
+</ol>
+<h2 id="-输出最终内容">💬 输出最终内容</h2>
+<h3 id="1-生成器对象">1. 生成器对象</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">res_stream</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">session_state</span><span class="p">[</span><span class="s2">&#34;rag&#34;</span><span class="p">]</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">stream</span><span class="p">({</span><span class="s2">&#34;input&#34;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">},</span> <span class="n">config</span><span class="o">.</span><span class="n">session_config</span><span class="p">)</span>
+</span></span></code></pre></div><p><code>res_stream</code>是一个生成器对象，类型大致是<code>Generator[str, None, None]</code>。</p>
+<h3 id="2-生成器函数">2. 生成器函数</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">capture</span><span class="p">(</span><span class="n">generator</span><span class="p">:</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">cache_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">generator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cache_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span> <span class="n">chunk</span>
+</span></span></code></pre></div><ol>
+<li><code>yield</code>关键字让<code>capture()</code>变成一个生成器函数，返回生成器对象。</li>
+<li><code>capture()</code>做了两件事：
+<ul>
+<li>把每一次的回复保存到一个列表，用<code>st.session_state[&quot;message&quot;]</code>记录到 Streamlit 的界面历史记录，达到一个聊天界面的效果；</li>
+<li><code>yield chunk</code>流式返回数据，配合<code>write_stream()</code>，达到一个打字机的效果。</li>
+</ul>
+</li>
+<li>事实上<code>capture()</code>从一个生成器对象流式获取值，再流式返回的生成器对象。</li>
+</ol>
+<h3 id="3-streamlit">3. Streamlit</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">st</span><span class="o">.</span><span class="n">chat_message</span><span class="p">(</span><span class="s2">&#34;assistant&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">write_stream</span><span class="p">(</span><span class="n">capture</span><span class="p">(</span><span class="n">res_stream</span><span class="p">,</span> <span class="n">ai_res_list</span><span class="p">))</span>
+</span></span></code></pre></div><p><code>write_stream()</code>接收生成器对象，实现流式输出效果。<code>&quot;assistant&quot;</code>表示这是 AI 说的话，输出在页面左边，头像是一个机器人；相对应的<code>&quot;user&quot;</code>表示用户说的话，输出在页面右边，头像是一个人。这是 Streamlit 内置好的功能，简单实用。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-03-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/langchain/">LangChain</a>,&nbsp;<a href="/tags/rag/">RAG</a>,&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/" class="prev" rel="prev" title="【Financial RAG Demo 项目】检索器管理"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【Financial RAG Demo 项目】检索器管理</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

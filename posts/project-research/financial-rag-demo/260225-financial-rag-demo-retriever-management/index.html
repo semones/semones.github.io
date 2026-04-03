@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【Financial RAG Demo 项目】检索器管理 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="【Financial RAG Demo 项目】检索器管理">
+  <meta property="og:description" content="🚀 初始化__init__(self, embedding) 1. 接收一个嵌入模型类 self.embedding = embedding 2. 初始化向量数据库连接信息 self.vector_store = Chroma( collection_name=config.collection_name, embedding_function=self.embedding, persist_directory=config.persist_directory ) 与KnowledgeBaseService相同，依旧是三个参数：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-25T23:01:23+08:00">
+    <meta property="article:modified_time" content="2026-02-25T23:01:23+08:00">
+    <meta property="article:tag" content="LangChain">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="Python">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【Financial RAG Demo 项目】检索器管理">
+  <meta name="twitter:description" content="🚀 初始化__init__(self, embedding) 1. 接收一个嵌入模型类 self.embedding = embedding 2. 初始化向量数据库连接信息 self.vector_store = Chroma( collection_name=config.collection_name, embedding_function=self.embedding, persist_directory=config.persist_directory ) 与KnowledgeBaseService相同，依旧是三个参数：">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/project-research/financial-rag-demo/260225-financial-rag-demo-retriever-management/" /><link rel="prev" href="http://localhost:1313/posts/project-research/financial-rag-demo/260223-financial-rag-demo-history-messages-storage/" /><link rel="next" href="http://localhost:1313/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【Financial RAG Demo 项目】检索器管理",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260225-financial-rag-demo-retriever-management\/"
+        },"genre": "posts","keywords": "LangChain, RAG, Python","wordcount":  772 ,
+        "url": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260225-financial-rag-demo-retriever-management\/","datePublished": "2026-02-25T23:01:23+08:00","dateModified": "2026-02-25T23:01:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【Financial RAG Demo 项目】检索器管理</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>项目研究</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-02-25">2026-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;772 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-初始化__init__self-embedding">🚀 初始化<code>__init__(self, embedding)</code></a>
+      <ul>
+        <li><a href="#1-接收一个嵌入模型类">1. 接收一个嵌入模型类</a></li>
+        <li><a href="#2-初始化向量数据库连接信息">2. 初始化向量数据库连接信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#-把数据库转换为检索器">🔄 把数据库转换为检索器</a>
+      <ul>
+        <li><a href="#1-as_retriever方法">1. <code>as_retriever()</code>方法</a></li>
+        <li><a href="#2-search_kwargs">2. <code>search_kwargs</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="-初始化__init__self-embedding">🚀 初始化<code>__init__(self, embedding)</code></h2>
+<h3 id="1-接收一个嵌入模型类">1. 接收一个嵌入模型类</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">embedding</span>
+</span></span></code></pre></div><h3 id="2-初始化向量数据库连接信息">2. 初始化向量数据库连接信息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="bp">self</span><span class="o">.</span><span class="n">vector_store</span> <span class="o">=</span> <span class="n">Chroma</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">collection_name</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">collection_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">embedding_function</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">persist_directory</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">persist_directory</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><p>与<code>KnowledgeBaseService</code>相同，依旧是三个参数：</p>
+<ul>
+<li><code>collection_name</code>：数据库的名称。</li>
+<li><code>embedding_function</code>：向量转换使用的模型。</li>
+<li><code>persist_directory</code>：数据库的位置，持久化地址。</li>
+</ul>
+<h2 id="-把数据库转换为检索器">🔄 把数据库转换为检索器</h2>
+<h3 id="1-as_retriever方法">1. <code>as_retriever()</code>方法</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_retriever</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_store</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+</span></span></code></pre></div><p><code>vector_store</code>是<code>langchain_chroma</code>模块下的<code>Chroma</code>对象实例，<strong><code>as_retriever()</code></strong> 把数据库对象转换为<strong>检索器对象 (VectorStoreRetriever)</strong>，也就是说<code>RetrieverConnectionService</code>模块中的<code>get_retriever()</code>方法返回的检索器，对应一个指定的数据库，只会从此数据库中检索文本。返回的对象可直接插入链路中。</p>
+<h3 id="2-search_kwargs">2. <code>search_kwargs</code></h3>
+<ol>
+<li>定义：LangChain 向量存储检索器的搜索参数<strong>字典</strong>，用于配置检索行为。</li>
+<li>原理：调用<code>as_retriever()</code>方法时，<code>search_kwargs</code>被传给底层的例如<code>similarity_search()</code>等方法，根据参数检索。</li>
+<li>常用标准参数：</li>
+</ol>
+<table>
+  <thead>
+      <tr>
+          <th>键</th>
+          <th>类型</th>
+          <th>说明</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>k</code></td>
+          <td>int</td>
+          <td>返回的最相似文档数量 (Top-K)</td>
+          <td><code>{&quot;k&quot;: 5}</code></td>
+      </tr>
+      <tr>
+          <td><code>score_threshold</code></td>
+          <td>float</td>
+          <td>相似度分数阈值 (0-1)，只有高于此阈值的文档才会被返回</td>
+          <td><code>{&quot;score_threshold&quot;: 0.7}</code></td>
+      </tr>
+      <tr>
+          <td><code>filter</code></td>
+          <td>dict</td>
+          <td>元数据过滤器，根据文档的<code>metadata</code>进行筛选</td>
+          <td><code>{&quot;filter&quot;: {&quot;source&quot;: &quot;report.pdf&quot;, &quot;year&quot;: 2026}}</code></td>
+      </tr>
+      <tr>
+          <td><code>fetch_k</code></td>
+          <td>int</td>
+          <td>初始获取的候选文本数量 (用于后续过滤)</td>
+          <td><code>{&quot;fetch_k&quot;: 20}</code></td>
+      </tr>
+      <tr>
+          <td><code>lambda_mult</code></td>
+          <td>float</td>
+          <td>MMR 多样性参数 (0-1)，越大越多样化</td>
+          <td><code>{&quot;lambda_mult&quot;: 0.5}</code></td>
+      </tr>
+      <tr>
+          <td>4. <strong>最大边界相关检索 (Maximal Marginal Relevance)</strong></td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>默认使用相似度检索，添加<code>search_type</code>参数后按指定的检索类型：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_retriever</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector_store</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">search_type</span><span class="o">=</span><span class="s2">&#34;mmr&#34;</span><span class="p">,</span>  <span class="c1"># MMR 方式</span>
+</span></span><span class="line"><span class="cl">        <span class="n">search_kwargs</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;fetch_k&#34;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;lambda_mult&#34;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li>流程解析：
+<ol>
+<li>告诉系统用 MMR 方式检索；</li>
+<li>先按照相似度返回候选文本的数量；</li>
+<li>指定多样性参数；</li>
+<li>最终返回的结果数。</li>
+</ol>
+</li>
+<li><strong>优势：降低重复性，返回多角度的信息。</strong></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-02-25</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/langchain/">LangChain</a>,&nbsp;<a href="/tags/rag/">RAG</a>,&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/project-research/financial-rag-demo/260223-financial-rag-demo-history-messages-storage/" class="prev" rel="prev" title="【Financial RAG Demo 项目】历史记录存储"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【Financial RAG Demo 项目】历史记录存储</a>
+            <a href="/posts/project-research/financial-rag-demo/260302-financial-rag-demo-rag-construction/" class="next" rel="next" title="【Financial RAG Demo 项目】RAG 构建">【Financial RAG Demo 项目】RAG 构建<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

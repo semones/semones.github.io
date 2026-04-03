@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【Financial RAG Demo 项目】概览 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="【Financial RAG Demo 项目】概览">
+  <meta property="og:description" content="🎯 项目定位 1. 项目名称 基于 RAG 技术的金融领域智能客服系统
+2. 技术栈 Python &#43; LangChain &#43; 通义千问 &#43; Chroma &#43; Streamlit
+3. 核心功能 知识库管理 检索增强式对话 🏗️ 技术架构 整个项目分为两个线索，分别是把文件嵌入向量数据库、根据用户提问检索数据库并返回结果。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-11T21:54:52+08:00">
+    <meta property="article:modified_time" content="2026-02-11T21:54:52+08:00">
+    <meta property="article:tag" content="LangChain">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="Python">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【Financial RAG Demo 项目】概览">
+  <meta name="twitter:description" content="🎯 项目定位 1. 项目名称 基于 RAG 技术的金融领域智能客服系统
+2. 技术栈 Python &#43; LangChain &#43; 通义千问 &#43; Chroma &#43; Streamlit
+3. 核心功能 知识库管理 检索增强式对话 🏗️ 技术架构 整个项目分为两个线索，分别是把文件嵌入向量数据库、根据用户提问检索数据库并返回结果。">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/" /><link rel="prev" href="http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/" /><link rel="next" href="http://localhost:1313/posts/project-research/financial-rag-demo/260217-financial-rag-demo-knowledge-base-construction/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【Financial RAG Demo 项目】概览",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260211-financial-rag-demo-outline\/"
+        },"genre": "posts","keywords": "LangChain, RAG, Python","wordcount":  503 ,
+        "url": "http:\/\/localhost:1313\/posts\/project-research\/financial-rag-demo\/260211-financial-rag-demo-outline\/","datePublished": "2026-02-11T21:54:52+08:00","dateModified": "2026-02-11T21:54:52+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【Financial RAG Demo 项目】概览</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%A0%94%E7%A9%B6/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>项目研究</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-02-11">2026-02-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;503 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-项目定位">🎯 项目定位</a>
+      <ul>
+        <li><a href="#1-项目名称">1. 项目名称</a></li>
+        <li><a href="#2-技术栈">2. 技术栈</a></li>
+        <li><a href="#3-核心功能">3. 核心功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#-技术架构">🏗️ 技术架构</a>
+      <ul>
+        <li><a href="#1-数据嵌入">1. 数据嵌入</a></li>
+        <li><a href="#2-添加历史">2. 添加历史</a></li>
+        <li><a href="#3-增强检索">3. 增强检索</a></li>
+      </ul>
+    </li>
+    <li><a href="#-核心思想">💡 核心思想</a></li>
+    <li><a href="#-推荐链接">🔗 推荐链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="-项目定位">🎯 项目定位</h2>
+<h3 id="1-项目名称">1. 项目名称</h3>
+<p>基于 RAG 技术的金融领域智能客服系统</p>
+<h3 id="2-技术栈">2. 技术栈</h3>
+<p>Python + LangChain + 通义千问 + Chroma + Streamlit</p>
+<h3 id="3-核心功能">3. 核心功能</h3>
+<ul>
+<li>知识库管理</li>
+<li>检索增强式对话</li>
+</ul>
+<h2 id="-技术架构">🏗️ 技术架构</h2>
+<p>整个项目分为两个线索，分别是<strong>把文件嵌入向量数据库</strong>、<strong>根据用户提问检索数据库并返回结果</strong>。</p>
+<h3 id="1-数据嵌入">1. 数据嵌入</h3>
+<ul>
+<li><code>knowledge_base.py</code>提供文本去重、分割、向量嵌入的服务；</li>
+<li><code>app_file_uploader.py</code>提供数据上传的交互页面。</li>
+</ul>
+<h3 id="2-添加历史">2. 添加历史</h3>
+<ul>
+<li><code>file_history_store</code>提供历史记录存储服务，方便将历史记录封装进提问，降低模型幻觉。</li>
+</ul>
+<h3 id="3-增强检索">3. 增强检索</h3>
+<ul>
+<li><code>rag.py</code>提供深度检索服务，构建一条链路，实现获取用户输入、添加历史消息、检索匹配文本、添加匹配文本、返回模型回复的链路；</li>
+<li><code>app_chat.py</code>提供问答界面，获取用户输入给链路；</li>
+<li><code>retriever_connector</code>提供检索器与数据库连接的服务。</li>
+</ul>
+<h2 id="-核心思想">💡 核心思想</h2>
+<ul>
+<li>项目关键点在于链路 Chain 的构建，简单来说，Chain 要把<strong>用户输入、历史消息和匹配的知识段</strong>这三样东西<strong>打包</strong>发给大模型，大模型有了额外的知识后便可以进行专业的回复。</li>
+<li>链路构建的难点就在于如何<strong>获取</strong>和<strong>规格化</strong>上述三种数据，要理清数据结构在链路中传递时的变化。</li>
+</ul>
+<h2 id="-推荐链接">🔗 推荐链接</h2>
+<p><strong><a href="https://github.com/semones/financial-rag-demo" target="_blank" rel="noopener noreffer ">GitHub Demo 展示仓库</a></strong>
+<strong><a href="https://blog.csdn.net/semosic/category_13151058.html" target="_blank" rel="noopener noreffer ">CSDN 笔记地址</a></strong></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-02-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/langchain/">LangChain</a>,&nbsp;<a href="/tags/rag/">RAG</a>,&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/efficiency-memos/250413-vscode-deploy/" class="prev" rel="prev" title="【效率备忘】Microsoft VS Code 配置推荐"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【效率备忘】Microsoft VS Code 配置推荐</a>
+            <a href="/posts/project-research/financial-rag-demo/260217-financial-rag-demo-knowledge-base-construction/" class="next" rel="next" title="【Financial RAG Demo 项目】知识库构建">【Financial RAG Demo 项目】知识库构建<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
