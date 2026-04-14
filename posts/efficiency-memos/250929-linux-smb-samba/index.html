@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>【效率备忘】Linux 启用 SMB 文件共享 - Sem&#39;s Blog</title><meta name="Description" content="坚持学习。"><meta property="og:url" content="http://localhost:1313/posts/efficiency-memos/250929-linux-smb-samba/">
+  <meta property="og:site_name" content="Sem&#39;s Blog">
+  <meta property="og:title" content="【效率备忘】Linux 启用 SMB 文件共享">
+  <meta property="og:description" content="对于跨平台的局域网文件传输，使用 SMB 协议是非常简洁方便的，这是微软开发的一种应用层网络传输协议，Windows 系统会提供原生支持，其他平台可能要借助第三方工具，本文会给出 Debian 系的 Linux 设备使用 Samba 启动 SMB 服务的流程，并给出原理简述以方便理解。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-29T23:15:46+08:00">
+    <meta property="article:modified_time" content="2025-09-29T23:15:46+08:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Samba">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【效率备忘】Linux 启用 SMB 文件共享">
+  <meta name="twitter:description" content="对于跨平台的局域网文件传输，使用 SMB 协议是非常简洁方便的，这是微软开发的一种应用层网络传输协议，Windows 系统会提供原生支持，其他平台可能要借助第三方工具，本文会给出 Debian 系的 Linux 设备使用 Samba 启动 SMB 服务的流程，并给出原理简述以方便理解。">
+<meta name="application-name" content="Sem&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="Sem&#39;s Blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/posts/efficiency-memos/250929-linux-smb-samba/" /><link rel="prev" href="http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/" /><link rel="next" href="http://localhost:1313/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "【效率备忘】Linux 启用 SMB 文件共享",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/posts\/efficiency-memos\/250929-linux-smb-samba\/"
+        },"genre": "posts","keywords": "Linux, Samba","wordcount":  1108 ,
+        "url": "http:\/\/localhost:1313\/posts\/efficiency-memos\/250929-linux-smb-samba\/","datePublished": "2025-09-29T23:15:46+08:00","dateModified": "2025-09-29T23:15:46+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Semones"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Sem&#39;s Blog">Sem&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【效率备忘】Linux 启用 SMB 文件共享</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>效率备忘</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-29">2025-09-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1108 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#-安装-samba">📦 安装 Samba</a></li>
+    <li><a href="#-创建用户">🔐 创建用户</a></li>
+    <li><a href="#-创建共享目录">📁 创建共享目录</a></li>
+    <li><a href="#-配置共享目录">⚙️ 配置共享目录</a></li>
+    <li><a href="#-兼容性问题解决方案">🔄 兼容性问题解决方案</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>对于<strong>跨平台</strong>的局域网文件传输，使用 SMB 协议是非常简洁方便的，这是微软开发的一种应用层网络传输协议，Windows 系统会提供原生支持，其他平台可能要借助第三方工具，本文会给出 <strong>Debian</strong> 系的 Linux 设备使用 <strong>Samba</strong> 启动 SMB 服务的流程，并给出<strong>原理简述</strong>以方便理解。</p>
+<h2 id="-安装-samba">📦 安装 Samba</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install samba
+</span></span></code></pre></div><p>Samba 会自动在系统中创建一个开机自启的服务<code>smdb</code>，使用下面指令查看状态：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl status smbd
+</span></span></code></pre></div><h2 id="-创建用户">🔐 创建用户</h2>
+<p>SMB 一般有注册用户和匿名用户 (Guest) 两种访问方式，考虑到安全问题，建议使用注册用户访问。Linux 启动 Samba 后就变成了一个 SMB 服务器，首先要在服务器中创建用户，<strong>由于涉及文件操作，Samba 用户名必须与 Linux 系统中的某个用户名一致以便权限控制</strong>，以下命令都基于一个虚构的主用户<code>semones</code>：</p>
+<ol>
+<li>添加用户到 Samba</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo smbpasswd -a semones  <span class="c1"># 填自己的用户名</span>
+</span></span></code></pre></div><ol start="2">
+<li>设置密码</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo smbpasswd <span class="m">123456</span>  <span class="c1"># 设置一个密码</span>
+</span></span></code></pre></div><p>此密码与 Linux 系统无关，独立存在于 Samba 本地数据库。</p>
+<ol start="3">
+<li>激活用户</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo smbpasswd -e semones
+</span></span><span class="line"><span class="cl"><span class="c1"># 禁用用户可使用 sudo smbpasswd -d semones</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除用户可使用 sudo smbpasswd -x semones</span>
+</span></span></code></pre></div><p><strong>其他设备若使用此凭证登陆，后续的文件操作都是以 Linux 系统中 semones 的身份来执行，权限一致</strong></p>
+<ol start="4">
+<li>查看信息 (非必须)</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo pdbedit -L        <span class="c1"># 查看用户列表</span>
+</span></span><span class="line"><span class="cl">sudo pdbedit -Lv semones  <span class="c1"># 查看详细信息</span>
+</span></span></code></pre></div><p>详细信息中可以看到 Samba 账户包含的<code>User SID</code>等信息，说明 Samba 在模拟 Windows 行为来实现 SMB。</p>
+<h2 id="-创建共享目录">📁 创建共享目录</h2>
+<ol>
+<li>在用户目录下创建一个名为 Share 的文件夹</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p ~/Share
+</span></span></code></pre></div><ol start="2">
+<li>设置权限</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo chmod <span class="m">755</span> ~/Share
+</span></span></code></pre></div><ul>
+<li>7 (所有者权限)：4+2+1 = 读 (r) + 写 (w) + 执行 (x) → <code>rwx</code></li>
+<li>5 (组用户权限)：4+0+1 = 读(r) + 执行(x) → <code>r-x</code></li>
+<li>5 (其他用户权限)：4+0+1 = 读 (r) + 执行 (x) → <code>r-x</code></li>
+<li>完整的权限字符串：<code>rwxr-xr-x</code>
+<em>注：本例是基于一个虚构的主用户<code>semones</code>，默认为文件夹所有者，如果是其他用户，要修改组用户权限。</em></li>
+</ul>
+<h2 id="-配置共享目录">⚙️ 配置共享目录</h2>
+<ol>
+<li>打开配置文件
+Samba 的配置文件在<code>/etc/samba/smb.conf</code>，所有者是<code>root</code>，无法直接修改，提供几种方法：</li>
+</ol>
+<ul>
+<li>右键<code>samba</code>文件夹选择“以 root 身份打开”，再打开<code>smb.conf</code>文件。</li>
+<li>在终端中使用 nano 编辑：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo nano /etc/samba/smb.conf
+</span></span></code></pre></div><ol start="2">
+<li>在末尾添加配置
+一个包含必要元素的样例：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[Share]</span>
+</span></span><span class="line"><span class="cl">   <span class="na">path</span> <span class="o">=</span> <span class="s">/home/semones/Share
+</span></span></span><span class="line"><span class="cl"><span class="s">   guest ok = no
+</span></span></span><span class="line"><span class="cl"><span class="s">   read only = no</span>
+</span></span></code></pre></div><ul>
+<li><code>[Share]</code>：共享名，其他设备看到的名字</li>
+<li><code>path</code>：共享目录的路径</li>
+<li><code>guest ok</code>：访问控制，<code>no</code>表示必须登录</li>
+<li><code>read only</code>：权限控制，<code>no</code>表示允许读写</li>
+</ul>
+<ol start="3">
+<li>重启服务确保读取新配置</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart smbd
+</span></span></code></pre></div><p><strong>此时已经可以用其他设备登录并操作文件！</strong></p>
+<h2 id="-兼容性问题解决方案">🔄 兼容性问题解决方案</h2>
+<p>其他设备特别是苹果可能会出现兼容性问题，需要在基础配置后添加：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl">   <span class="na">vfs objects</span> <span class="o">=</span> <span class="s">catia fruit streams_xattr
+</span></span></span><span class="line"><span class="cl"><span class="s">   fruit:nfs_aces = no</span>
+</span></span></code></pre></div><ol>
+<li><code>vfs objects</code>制定启用 Samba 的哪些插件：</li>
+</ol>
+<ul>
+<li><code>catia</code>：文件名兼容</li>
+<li><code>fruit</code>：文件系统语义兼容</li>
+<li><code>streams_xattr</code>：Windows 数据流兼容</li>
+</ul>
+<ol start="2">
+<li><code>fruit:nfs_aces</code>是<code>fruit</code>插件的详细设置：
+<code>no</code>表示不使用 Linux/NFS 的 ACL，而是用自己的 fruit 机制来模拟 macOS 的权限规则。</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-09-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/samba/">Samba</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/efficiency-memos/250413-vscode-deploy/" class="prev" rel="prev" title="【效率备忘】Microsoft VS Code 配置推荐"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>【效率备忘】Microsoft VS Code 配置推荐</a>
+            <a href="/posts/project-research/financial-rag-demo/260211-financial-rag-demo-outline/" class="next" rel="next" title="【Financial RAG Demo 项目】概览">【Financial RAG Demo 项目】概览<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023 - 2026</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Semones</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"lightgallery":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

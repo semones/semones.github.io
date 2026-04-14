@@ -32,7 +32,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/localhost:1313\/posts\/algorithm-notes\/240721-spiral-matrix\/"
-        },"genre": "posts","keywords": "逻辑模拟","wordcount":  1489 ,
+        },"genre": "posts","keywords": "逻辑模拟","wordcount":  1488 ,
         "url": "http:\/\/localhost:1313\/posts\/algorithm-notes\/240721-spiral-matrix\/","datePublished": "2024-07-21T20:14:22+08:00","dateModified": "2024-07-21T20:14:22+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -74,7 +74,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【算法笔记】螺旋矩阵</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>算法笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-21">2024-07-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1489 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-21">2024-07-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1488 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -146,9 +146,11 @@
 </ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">new_x</span> <span class="o">=</span> <span class="n">start_x</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl"><span class="n">new_y</span> <span class="o">=</span> <span class="n">start_y</span> <span class="o">+</span> <span class="n">directions</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-</span></span></code></pre></div><p><strong>控制<code>index</code>的值就可以改变相邻的一对值，实现方向控制</strong>。例如，<code>index = 0</code>时，<code>directions[index]</code>和<code>directions[index + 1]</code>构成<code>[0, 1]</code>，此时<code>new_x</code>不变，<code>new_y</code>加 1，实现向右移动。
-3. 改变方向：
-<code>new_x</code>和<code>new_y</code>是<strong>先驱指针</strong>。</p>
+</span></span></code></pre></div><p><strong>控制<code>index</code>的值就可以改变相邻的一对值，实现方向控制</strong>。例如，<code>index = 0</code>时，<code>directions[index]</code>和<code>directions[index + 1]</code>构成<code>[0, 1]</code>，此时<code>new_x</code>不变，<code>new_y</code>加 1，实现向右移动。</p>
+<ol start="3">
+<li>改变方向：
+<code>new_x</code>和<code>new_y</code>是<strong>先驱指针</strong>。</li>
+</ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">new_x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_x</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">new_y</span> <span class="o">&gt;=</span> <span class="n">Math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">k</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="ow">or</span> <span class="n">matrix</span><span class="p">[</span><span class="n">new_x</span><span class="p">][</span><span class="n">new_y</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&#34;*&#34;</span><span class="p">):</span>
 </span></span></code></pre></div><ul>
 <li>改变方向就是改变<code>index</code>的值，螺旋矩阵是右下左上轮回，根据条件判断，需要改变的时候就改变<code>index</code>。</li>

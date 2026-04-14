@@ -153,6 +153,14 @@
 <p>整个项目分为两个线索，分别是<strong>把文件嵌入向量数据库</strong>、<strong>根据用户提问检索数据库并返回结果</strong>。</p>]]></description>
 </item>
 <item>
+    <title>【效率备忘】Linux 启用 SMB 文件共享</title>
+    <link>http://localhost:1313/posts/efficiency-memos/250929-linux-smb-samba/</link>
+    <pubDate>Mon, 29 Sep 2025 23:15:46 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>http://localhost:1313/posts/efficiency-memos/250929-linux-smb-samba/</guid>
+    <description><![CDATA[<p>对于<strong>跨平台</strong>的局域网文件传输，使用 SMB 协议是非常简洁方便的，这是微软开发的一种应用层网络传输协议，Windows 系统会提供原生支持，其他平台可能要借助第三方工具，本文会给出 <strong>Debian</strong> 系的 Linux 设备使用 <strong>Samba</strong> 启动 SMB 服务的流程，并给出<strong>原理简述</strong>以方便理解。</p>]]></description>
+</item>
+<item>
     <title>【效率备忘】Microsoft VS Code 配置推荐</title>
     <link>http://localhost:1313/posts/efficiency-memos/250413-vscode-deploy/</link>
     <pubDate>Sun, 13 Apr 2025 22:21:54 &#43;0800</pubDate>
@@ -429,16 +437,6 @@
 <p><strong>理解一门语言要从底层入手。</strong></p></blockquote>
 <h2 id="1-地址">1. 地址</h2>
 <p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个<code>.exe</code>文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。</p>]]></description>
-</item>
-<item>
-    <title>【效率备忘】Windows10/11 系统空间释放建议</title>
-    <link>http://localhost:1313/posts/efficiency-memos/230901-windows-system-space-release/</link>
-    <pubDate>Fri, 01 Sep 2023 18:49:24 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>http://localhost:1313/posts/efficiency-memos/230901-windows-system-space-release/</guid>
-    <description><![CDATA[<p>本文会讲解几种 Windows 完全原生的方法来释放 C 盘空间，<strong>注意每种方法都存在一定程度风险</strong>，仅供参考。</p>
-<h2 id="1-删除系统恢复分区">1. 删除系统恢复分区</h2>
-<p>系统恢复分区是安装新系统时自动分配的隐藏磁盘分区，可以在磁盘管理工具查看但无法进行管理操作。考虑到实际需要系统恢复时往往使用第三方工具，建议关闭。以管理员身份运行 PowerShell，<strong>依次</strong>输入：</p>]]></description>
 </item>
 </channel>
 </rss>
