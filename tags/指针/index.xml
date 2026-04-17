@@ -12,7 +12,7 @@
     <description><![CDATA[<blockquote>
 <p><strong>理解一门语言要从底层入手。</strong></p></blockquote>
 <h2 id="1-地址">1. 地址</h2>
-<p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个<code>.exe</code>文件，机器码可以对应汇编语言，是直接与 CPU 对话的语言。各类操作系统比如 Windows、Linux 会提供 API 支持 C 程序的执行，可以看作一个巨大的“运行环境”。对比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码是与 JVM 对话的语言，JVM 就是一个虚拟机，模拟了操作系统和 CPU，它需要把字节码翻译成各种机器码与不同架构的 CPU 对话。JVM 是运行在系统上的，而 Java 程序是运行在 JVM 上的。</p>]]></description>
+<p>C 语言的编译器会把<code>.c</code>文件编译为<strong>机器码</strong>存入一个可执行文件，在 Windows 里是<code>.exe</code>，在 Linux 里一般是<code>ELF</code>。机器码对应的就是汇编语言，是直接与 CPU 对话的语言。可以把操作系统看作一个巨大的“运行环境”，这些“运行环境”可以读取这类文件并直接执行里面包含的二进制数据，在系统虚拟空间里分配虚拟内存给进程。类比 Java 的编译器会把<code>.java</code>文件编译为<strong>字节码</strong>存入一个<code>.class</code>文件，其实思路是相似的，字节码文件是 JVM 虚拟机平台的语言，是 JVM 的“可执行文件”。JVM 内部有自己的一套虚拟地址空间，它读取<code>.class</code>文件包含的二进制数据，在自己的这套空间里分配空间并创建多个 Java 线程。事实上 JVM 会把 Java 线程会映射到操作系统的内核线程，由操作系统管理，方便真实的 CPU 调度。不同平台和 CPU 架构对应的 JRE 读取都是一样的<code>.class</code>文件，但是会实时翻译成对应架构 CPU 能看懂的语言，以此达到“一次编译，到处执行”的目的。</p>]]></description>
 </item>
 </channel>
 </rss>
