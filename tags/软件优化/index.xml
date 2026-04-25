@@ -138,6 +138,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.memories&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>							<span class="c1">// 关闭通义灵码记忆功能
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="err">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="err">,</span>	<span class="c1">// 允许通义灵码自动调用工具
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;Lingma.HttpProxySettings&#34;</span><span class="err">:</span> <span class="s2">&#34;manual&#34;</span><span class="err">,</span>						<span class="c1">// 关闭系统代理
 </span></span></span></code></pre></div><h3 id="3-python">3. Python</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Python
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s2">&#34;python.autoComplete.extraPaths&#34;</span><span class="err">:</span> <span class="p">[]</span><span class="err">,</span>				<span class="c1">// 为自动补全功能添加额外的模块搜索路径
@@ -217,6 +218,7 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// Lingma - Alibaba Cloud AI Coding Assistant
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.memories&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>                           <span class="c1">// 关闭通义灵码记忆功能
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.aI Chat.webToolsInAsk/AgentMode&#34;</span><span class="p">:</span> <span class="s2">&#34;Auto-execute&#34;</span><span class="p">,</span>   <span class="c1">// 允许通义灵码自动调用工具
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nt">&#34;Lingma.HttpProxySettings&#34;</span><span class="p">:</span> <span class="s2">&#34;manual&#34;</span><span class="p">,</span>						<span class="c1">// 关闭系统代理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Python
