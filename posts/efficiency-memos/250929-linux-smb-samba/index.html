@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/localhost:1313\/posts\/efficiency-memos\/250929-linux-smb-samba\/"
-        },"genre": "posts","keywords": "Linux, Samba","wordcount":  1108 ,
+        },"genre": "posts","keywords": "Linux, Samba","wordcount":  1142 ,
         "url": "http:\/\/localhost:1313\/posts\/efficiency-memos\/250929-linux-smb-samba\/","datePublished": "2025-09-29T23:15:46+08:00","dateModified": "2025-09-29T23:15:46+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -75,7 +75,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">【效率备忘】Linux 启用 SMB 文件共享</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Semones</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%95%88%E7%8E%87%E5%A4%87%E5%BF%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>效率备忘</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-29">2025-09-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1108 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-29">2025-09-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1142 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -88,6 +88,7 @@
     <li><a href="#-创建用户">🔐 创建用户</a></li>
     <li><a href="#-创建共享目录">📁 创建共享目录</a></li>
     <li><a href="#-配置共享目录">⚙️ 配置共享目录</a></li>
+    <li><a href="#-配置防火墙">🛡️ 配置防火墙</a></li>
     <li><a href="#-兼容性问题解决方案">🔄 兼容性问题解决方案</a></li>
   </ul>
 </nav></div>
@@ -166,6 +167,11 @@ Samba 的配置文件在<code>/etc/samba/smb.conf</code>，所有者是<code>roo
 </ol>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart smbd
 </span></span></code></pre></div><p><strong>此时已经可以用其他设备登录并操作文件！</strong></p>
+<h2 id="-配置防火墙">🛡️ 配置防火墙</h2>
+<p>Samba 传输会受防火墙影响
+直接终端输入</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw allow Samba
+</span></span></code></pre></div><p>自动添加规则。</p>
 <h2 id="-兼容性问题解决方案">🔄 兼容性问题解决方案</h2>
 <p>其他设备特别是苹果可能会出现兼容性问题，需要在基础配置后添加：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl">   <span class="na">vfs objects</span> <span class="o">=</span> <span class="s">catia fruit streams_xattr
